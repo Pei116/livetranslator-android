@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#42a5f5</color>
+    <color name="colorPrimaryDark">#0077c2</color>
+    <color name="colorAccent">#ff8a65</color>
+
+    <color name="overlayButton">#50000000</color>
+
+    <color name="intro_slide_bg_1">#00766c</color>
+    <color name="intro_slide_bg_2">#c77800</color>
+    <color name="intro_slide_bg_3">#4b636e</color>
+</resources>

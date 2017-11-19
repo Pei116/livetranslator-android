@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "308150038076",
+    "firebase_url": "https://live-translator-1f7c6.firebaseio.com",
+    "project_id": "live-translator-1f7c6",
+    "storage_bucket": "live-translator-1f7c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308150038076:android:3371185b90e7784d",
+        "android_client_info": {
+          "package_name": "com.wwk.livetranslator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308150038076-e0ajom3vrlki9oc5vkoj9u5duh11397t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANtx8pdkedaTcavVp5fyvxNDMBjXVKkPU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

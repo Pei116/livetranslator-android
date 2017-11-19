@@ -1,0 +1,144 @@
+<resources>
+    <string name="app_name">Live Translator</string>
+
+    <!--Intro-->
+    <string name="intro_title_1">Translate Everything</string>
+    <string name="intro_title_2">Live Translation</string>
+    <string name="intro_title_3">Listen to Translation</string>
+
+    <string name="intro_detail_1">Configure and distribute your Wi-Fi networks.</string>
+    <string name="intro_detail_2">Invite your friends to your Wi-Fi so that they can connect without typing password.</string>
+    <string name="intro_detail_3">Discover and connect to Wi-Fis wherever you go all around the globe.</string>
+
+    <string name="action_translate">Translate</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_allow">Allow</string>
+    <string name="action_no_thanks">No, thanks</string>
+
+    <string name="permission_ontop_title">Live Translation</string>
+    <string name="permission_ontop_rationale">Allow permission to translate on top of other apps.</string>
+
+    <!--Languages-->
+    <string-array name="language_codes">
+        <item>af</item>
+        <item>sq</item>
+        <item>am</item>
+        <item>zh-CN</item>
+        <item>zh-TW</item>
+        <item>ko</item>
+    </string-array>
+    <string-array name="language_names">
+        <item>Afrikaans</item>
+        <item>Albanian</item>
+        <item>Amharic</item>
+        <item>Chinese (Simplified)</item>
+        <item>Chinese (Traditional)</item>
+        <item>Korean</item>
+    </string-array>
+    <string name="language_auto">- Auto Detect -</string>
+    <string name="action_permission">Request Permission</string>
+    <!--Afrikaans	af-->
+    <!--Albanian	sq-->
+    <!--Amharic	am-->
+    <!--Arabic	ar-->
+    <!--Armenian	hy-->
+    <!--Azeerbaijani	az-->
+    <!--Basque	eu-->
+    <!--Belarusian	be-->
+    <!--Bengali	bn-->
+    <!--Bosnian	bs-->
+    <!--Bulgarian	bg-->
+    <!--Catalan	ca-->
+    <!--Cebuano	ceb (ISO-639-2)-->
+    <!--Chinese (Simplified)	zh-CN (BCP-47)-->
+    <!--Chinese (Traditional)	zh-TW (BCP-47)-->
+    <!--Corsican	co-->
+    <!--Croatian	hr-->
+    <!--Czech	cs-->
+    <!--Danish	da-->
+    <!--Dutch	nl-->
+    <!--English	en-->
+    <!--Esperanto	eo-->
+    <!--Estonian	et-->
+    <!--Finnish	fi-->
+    <!--French	fr-->
+    <!--Frisian	fy-->
+    <!--Galician	gl-->
+    <!--Georgian	ka-->
+    <!--German	de-->
+    <!--Greek	el-->
+    <!--Gujarati	gu-->
+    <!--Haitian Creole	ht-->
+    <!--Hausa	ha-->
+    <!--Hawaiian	haw (ISO-639-2)-->
+    <!--Hebrew	iw-->
+    <!--Hindi	hi-->
+    <!--Hmong	hmn (ISO-639-2)-->
+    <!--Hungarian	hu-->
+    <!--Icelandic	is-->
+    <!--Igbo	ig-->
+    <!--Indonesian	id-->
+    <!--Irish	ga-->
+    <!--Italian	it-->
+    <!--Japanese	ja-->
+    <!--Javanese	jw-->
+    <!--Kannada	kn-->
+    <!--Kazakh	kk-->
+    <!--Khmer	km-->
+    <!--Korean	ko-->
+    <!--Kurdish	ku-->
+    <!--Kyrgyz	ky-->
+    <!--Lao	lo-->
+    <!--Latin	la-->
+    <!--Latvian	lv-->
+    <!--Lithuanian	lt-->
+    <!--Luxembourgish	lb-->
+    <!--Macedonian	mk-->
+    <!--Malagasy	mg-->
+    <!--Malay	ms-->
+    <!--Malayalam	ml-->
+    <!--Maltese	mt-->
+    <!--Maori	mi-->
+    <!--Marathi	mr-->
+    <!--Mongolian	mn-->
+    <!--Myanmar (Burmese)	my-->
+    <!--Nepali	ne-->
+    <!--Norwegian	no-->
+    <!--Nyanja (Chichewa)	ny-->
+    <!--Pashto	ps-->
+    <!--Persian	fa-->
+    <!--Polish	pl-->
+    <!--Portuguese (Portugal, Brazil)	pt-->
+    <!--Punjabi	pa-->
+    <!--Romanian	ro-->
+    <!--Russian	ru-->
+    <!--Samoan	sm-->
+    <!--Scots Gaelic	gd-->
+    <!--Serbian	sr-->
+    <!--Sesotho	st-->
+    <!--Shona	sn-->
+    <!--Sindhi	sd-->
+    <!--Sinhala (Sinhalese)	si-->
+    <!--Slovak	sk-->
+    <!--Slovenian	sl-->
+    <!--Somali	so-->
+    <!--Spanish	es-->
+    <!--Sundanese	su-->
+    <!--Swahili	sw-->
+    <!--Swedish	sv-->
+    <!--Tagalog (Filipino)	tl-->
+    <!--Tajik	tg-->
+    <!--Tamil	ta-->
+    <!--Telugu	te-->
+    <!--Thai	th-->
+    <!--Turkish	tr-->
+    <!--Ukrainian	uk-->
+    <!--Urdu	ur-->
+    <!--Uzbek	uz-->
+    <!--Vietnamese	vi-->
+    <!--Welsh	cy-->
+    <!--Xhosa	xh-->
+    <!--Yiddish	yi-->
+    <!--Yoruba	yo-->
+    <!--Zulu	zu-->
+</resources>

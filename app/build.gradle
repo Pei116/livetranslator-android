@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.wwk.livetranslator"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    flavorDimensions "target"
+    productFlavors {
+        dev {
+            dimension "target"
+            versionNameSuffix '-dev'
+            buildConfigField "String", "API_BASE_URL", "\"https://192.168.0.2/api/v1/\""
+        }
+        staging {
+            dimension "target"
+            versionNameSuffix '-test'
+            buildConfigField "String", "API_BASE_URL", "\"https://ec2-34-213-209-211.us-west-2.compute.amazonaws.com/api/v1/\""
+        }
+        live {
+            dimension "target"
+        }
+    }
+}
+
+def SUPPORT = "26.1.0"
+def GMS = "11.6.0"
+def MULTIDEX = "1.0.2"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "com.android.support:multidex:$MULTIDEX"
+    implementation('com.squareup.retrofit2:retrofit:2.3.0') {
+        // exclude Retrofit’s OkHttp dependency module and define your own module import
+        exclude module: 'okhttp'
+    }
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true
+    }
+    implementation "com.google.firebase:firebase-core:$GMS"
+    implementation "com.google.firebase:firebase-messaging:$GMS"
+    implementation 'com.github.apl-devs:appintro:v4.2.2'
+    implementation "com.android.support:design:$SUPPORT"
+}
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
