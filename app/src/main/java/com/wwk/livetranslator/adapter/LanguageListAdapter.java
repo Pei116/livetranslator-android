@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wwk.livetranslator.R;
+import com.wwk.livetranslator.manager.TranslationManager;
 
 /**
  * Created by wwk on 11/19/17.
@@ -36,8 +37,8 @@ public class LanguageListAdapter extends BaseAdapter {
     }
 
     private void initLanguages() {
-        languageCodes = context.getResources().getStringArray(R.array.language_codes);
-        languageNames = context.getResources().getStringArray(R.array.language_names);
+        languageCodes = TranslationManager.getInstance().getLanguageCodes();
+        languageNames = TranslationManager.getInstance().getLanguageNames();
     }
 
     @Override

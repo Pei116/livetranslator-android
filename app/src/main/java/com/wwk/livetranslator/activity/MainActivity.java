@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.adapter.LanguageListAdapter;
+import com.wwk.livetranslator.manager.TranslationManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,6 +79,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onTranslate(View view) {
-        targetText.setText(sourceText.getText().toString());
+        TranslationManager.getInstance().translate(sourceText.getText().toString(), (success, translation) -> targetText.setText(translation));
     }
 }

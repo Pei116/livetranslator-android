@@ -6,11 +6,22 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.wwk.livetranslator.Application;
+import com.wwk.livetranslator.R;
+import com.wwk.livetranslator.api.APIClient;
+import com.wwk.livetranslator.api.APIInterface;
 import com.wwk.livetranslator.service.TranslationService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by wwk on 11/12/17.
@@ -21,7 +32,17 @@ public class TranslationManager {
 
     private static final String TAG = TranslationManager.class.getSimpleName();
 
+    private static final String PREF_SOURCE_LANGUAGE = "source_language";
+    private static final String PREF_TARGET_LANGUAGE = "target_language";
+
     private static volatile TranslationManager instance;
+
+    private boolean serviceEnabled = true;
+    private String sourceLanguage;
+    private String targetLanguage;
+
+    private String[] languageCodes;
+    private String[] languageNames;
 
     // Private constructor
     private TranslationManager() {
@@ -30,6 +51,14 @@ public class TranslationManager {
         if (instance != null) {
             throw new RuntimeException("Use getInstance() method to get the single instance of this class.");
         }
+
+        Context context = Application.getInstance();
+        languageCodes = context.getResources().getStringArray(R.array.language_codes);
+        languageNames = context.getResources().getStringArray(R.array.language_names);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        sourceLanguage = sharedPrefs.getString(PREF_SOURCE_LANGUAGE, "auto");
+        targetLanguage = sharedPrefs.getString(PREF_TARGET_LANGUAGE, getCurrentLocale(context));
     }
 
     public static TranslationManager getInstance() {
@@ -93,8 +122,82 @@ public class TranslationManager {
         }
     }
 
-    public interface ClipboardChangeListener{
-        void clipboardChanged();
+    public void setSourceLanguage(String newLanguage) {
+        if (newLanguage == null) {
+            newLanguage = "auto";
+        }
+        if (newLanguage.equals(sourceLanguage)) {
+            return;
+        }
+
+        sourceLanguage = newLanguage;
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(Application.getInstance());
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString(PREF_SOURCE_LANGUAGE, sourceLanguage);
+        editor.apply();
     }
 
+    public String getSourceLanguage() {
+        return sourceLanguage;
+    }
+
+    public void setTargetLanguage(String newLanguage) {
+        if (newLanguage == null || newLanguage.equals(sourceLanguage)) {
+            return;
+        }
+
+        targetLanguage = newLanguage;
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(Application.getInstance());
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString(PREF_TARGET_LANGUAGE, targetLanguage);
+        editor.apply();
+    }
+
+    public String getTargetLanguage() {
+        return targetLanguage;
+    }
+
+    public String[] getLanguageCodes() {
+        return languageCodes;
+    }
+
+    public String[] getLanguageNames() {
+        return languageNames;
+    }
+
+    String getCurrentLocale(Context context){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            return context.getResources().getConfiguration().getLocales().get(0).getLanguage();
+        } else{
+            //noinspection deprecation
+            return context.getResources().getConfiguration().locale.getLanguage();
+        }
+    }
+
+    public void translate(String text, TranslationCallback callback) {
+        APIInterface apiInterface = APIClient.getClient(false).create(APIInterface.class);
+        if (serviceEnabled) {
+            Call<JsonObject> apiCall = apiInterface.translateViaService(text, sourceLanguage, targetLanguage);
+            apiCall.enqueue(new Callback<JsonObject>() {
+                @Override
+                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    if (response.isSuccessful()) {
+
+                    }
+                    else {
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                }
+            });
+        }
+    }
+
+    public interface TranslationCallback {
+        void didFinishTranslation(boolean success, String translation);
+    }
 }

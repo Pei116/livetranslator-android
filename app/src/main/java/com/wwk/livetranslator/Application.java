@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
+import com.wwk.livetranslator.helper.BuildInfo;
 import com.wwk.livetranslator.manager.TranslationManager;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by Pei on 7/25/17.
@@ -47,6 +51,10 @@ public class Application extends android.app.Application {
         registerActivityLifecycleCallbacks(lifecycleCallbacks);
 
         TranslationManager.getInstance().scheduleJob(this);
+
+        if (!BuildInfo.isDevelopment()) {
+            Fabric.with(this, new Crashlytics());
+        }
     }
 
     private boolean isServiceRunning(Class<?> serviceClass) {

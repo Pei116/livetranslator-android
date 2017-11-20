@@ -37,7 +37,7 @@
         android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:paddingTop="?attr/actionBarSize">
 
         <EditText
             android:id="@+id/sourceText"
@@ -75,14 +75,14 @@
         <Button
             android:id="@+id/translateButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:background="@drawable/button_fancy_fill"
             android:onClick="onTranslate"
             android:text="@string/action_translate"
             android:textAllCaps="false"
-            android:background="@drawable/button_fancy_fill"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -107,7 +107,7 @@
             android:id="@+id/sourceLangSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:spinnerMode="dialog"
@@ -121,7 +121,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:spinnerMode="dialog"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"

@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.github.paolorotolo.appintro.AppIntro2;
+import com.wwk.livetranslator.Constants;
 import com.wwk.livetranslator.fragment.IntroSlideFragment;
 
 public class IntroActivity extends AppIntro2 {
@@ -56,10 +57,11 @@ public class IntroActivity extends AppIntro2 {
     private void doneAndShowMain() {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPrefs.edit();
-//        editor.putBoolean(Constants.PREF_SKIPPED_APP_INTRO, true);
+        editor.putBoolean(Constants.PREF_SKIPPED_APP_INTRO, true);
         editor.apply();
 
         Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 }
