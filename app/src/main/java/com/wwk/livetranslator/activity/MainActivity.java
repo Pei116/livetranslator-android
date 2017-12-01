@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         sourceLanguageSpinner.setAdapter(new LanguageListAdapter(this, true));
         targetLanguageSpinner.setAdapter(new LanguageListAdapter(this));
+
+        targetText.setKeyListener(null);
     }
 
     @Override

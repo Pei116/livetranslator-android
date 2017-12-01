@@ -75,13 +75,12 @@ public class TranslationManager {
 
     private ClipboardManager.OnPrimaryClipChangedListener changedListener = () -> {
         final ClipboardManager clipboardManager = (ClipboardManager) Application.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
-        if (clipboardManager != null) {
+        if (!Application.getInstance().isInForeground() && clipboardManager != null) {
             ClipData clipData = clipboardManager.getPrimaryClip();
             if (clipData != null && clipData.getItemCount() > 0) {
                 CharSequence chars = clipData.getItemAt(clipData.getItemCount() - 1).getText();
                 if (chars != null) {
                     String text = clipData.getItemAt(clipData.getItemCount() - 1).getText().toString();
-                    Toast.makeText(Application.getInstance(), "Copied: " + text, Toast.LENGTH_LONG).show();
 
                     OverlayWindowManager.getInstance().showButtonOverlay(Application.getInstance());
                 }

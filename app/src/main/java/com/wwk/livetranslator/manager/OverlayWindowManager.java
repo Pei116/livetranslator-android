@@ -4,22 +4,26 @@ import android.animation.Animator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.Spinner;
 
 import com.wwk.livetranslator.Application;
 import com.wwk.livetranslator.R;
+import com.wwk.livetranslator.adapter.LanguageListAdapter;
 
 /**
  * Created by wwk on 11/12/17.
@@ -34,11 +38,15 @@ public class OverlayWindowManager
     private static final int BUTTON_HIDE_TIMEOUT = 5 * 1000;
     private static final String LAST_POSITION_X = "last_position_x";
     private static final String LAST_POSITION_Y = "last_position_y";
+    private static final int OVERLAY_NONE = 0;
+    private static final int OVERLAY_BUTTON = 1;
+    private static final int OVERLAY_MAIN = 2;
 
     private static volatile OverlayWindowManager instance;
 
+    private int overlayMode;
+    private View anchorView;
     private View overlayView;
-    private Button overlayButton;
     private float offsetX;
     private float offsetY;
     private int originalXPos;
@@ -75,10 +83,12 @@ public class OverlayWindowManager
             Log.i(TAG, "No permission for overlay");
             return;
         }
-        if (overlayButton != null) {
+        if (overlayMode == OVERLAY_BUTTON && overlayView != null) {
             checkAndResetHiding();
             return;
         }
+
+        overlayMode = OVERLAY_BUTTON;
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Application.getInstance());
         int lastX = sp.getInt(LAST_POSITION_X, Integer.MAX_VALUE);
@@ -86,13 +96,10 @@ public class OverlayWindowManager
 
         windowManager = (WindowManager) Application.getInstance().getSystemService(Context.WINDOW_SERVICE);
 
-//        overlayButton = new ImageButton(context);
-//        overlayButton.setImageResource(R.drawable.ic_translate_white_24dp);
-        overlayButton = new Button(context);
-        overlayButton.setText(R.string.action_translate);
-        overlayButton.setOnTouchListener(this);
-//        overlayButton.setBackgroundColor(context.getResources().getColor(R.color.colorOverlay));
-        overlayButton.setOnClickListener(this);
+        overlayView = LayoutInflater.from(context).inflate(R.layout.overlay_button, null);
+        Button translateButton = overlayView.findViewById(R.id.translateButton);
+        translateButton.setOnTouchListener(this);
+        translateButton.setOnClickListener(this);
 
         int permission = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY : WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
@@ -108,9 +115,25 @@ public class OverlayWindowManager
             params.x = lastX;
             params.y = lastY;
         }
-        windowManager.addView(overlayButton, params);
+        windowManager.addView(overlayView, params);
 
-        overlayView = new View(context);
+        addAnchorView(context);
+
+        // Animate to show
+        overlayView.setAlpha(0);
+        overlayView.animate()
+                .alpha(1)
+                .setDuration(100);
+
+        // Hide button after some seconds
+        hideButtonHandler = new Handler(Looper.getMainLooper());
+        hideButtonHandler.postDelayed(this::hideButtonOverlay, BUTTON_HIDE_TIMEOUT);
+    }
+
+    private void addAnchorView(Context context) {
+        int permission = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY : WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        anchorView = new View(context);
         WindowManager.LayoutParams topLeftParams = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
@@ -120,20 +143,14 @@ public class OverlayWindowManager
         topLeftParams.gravity = Gravity.LEFT | Gravity.TOP;
         topLeftParams.width = 10;
         topLeftParams.height = 10;
-        windowManager.addView(overlayView, topLeftParams);
-
-        // Animate to show
-        overlayButton.setAlpha(0);
-        overlayButton.animate()
-                .alpha(1)
-                .setDuration(100);
-
-        // Hide button after some seconds
-        hideButtonHandler = new Handler(Looper.getMainLooper());
-        hideButtonHandler.postDelayed(this::hideButtonOverlay, BUTTON_HIDE_TIMEOUT);
+        windowManager.addView(anchorView, topLeftParams);
     }
 
     public void hideButtonOverlay() {
+        hideOverlay(true);
+    }
+
+    public void hideOverlay(boolean animated) {
         if (interacting) return; // Do not hide while user interacts with the view
 
         if (hideButtonHandler != null) {
@@ -141,37 +158,46 @@ public class OverlayWindowManager
             hideButtonHandler = null;
         }
 
-        if (overlayButton != null) {
-            overlayButton.animate()
-                    .alpha(0)
-                    .setDuration(100)
-                    .setListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
+        overlayMode = OVERLAY_NONE;
+        if (overlayView != null) {
+            if (animated) {
+                overlayView.animate()
+                        .alpha(0)
+                        .setDuration(100)
+                        .setListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animation) {
 
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            if (overlayButton != null) {
-                                overlayButton.setVisibility(View.INVISIBLE);
-                                windowManager.removeView(overlayView);
-                                windowManager.removeView(overlayButton);
-                                overlayView = null;
-                                overlayButton = null;
                             }
-                        }
 
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                if (overlayView != null) {
+                                    overlayView.setVisibility(View.INVISIBLE);
+                                    windowManager.removeView(anchorView);
+                                    windowManager.removeView(overlayView);
+                                    anchorView = null;
+                                    overlayView = null;
+                                }
+                            }
 
-                        }
+                            @Override
+                            public void onAnimationCancel(Animator animation) {
 
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
+                            }
 
-                        }
-                    });
+                            @Override
+                            public void onAnimationRepeat(Animator animation) {
+
+                            }
+                        });
+            }
+            else {
+                windowManager.removeView(anchorView);
+                windowManager.removeView(overlayView);
+                anchorView = null;
+                overlayView = null;
+            }
         }
     }
 
@@ -186,7 +212,7 @@ public class OverlayWindowManager
             moving = false;
 
             int[] location = new int[2];
-            overlayButton.getLocationOnScreen(location);
+            overlayView.getLocationOnScreen(location);
 
             originalXPos = location[0];
             originalYPos = location[1];
@@ -195,17 +221,17 @@ public class OverlayWindowManager
             offsetY = originalYPos - y;
 
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            if (overlayButton == null) {
+            if (overlayView == null) {
                 moving = false;
                 return false;
             }
             int[] topLeftLocationOnScreen = new int[2];
-            overlayView.getLocationOnScreen(topLeftLocationOnScreen);
+            anchorView.getLocationOnScreen(topLeftLocationOnScreen);
 
             float x = event.getRawX();
             float y = event.getRawY();
 
-            WindowManager.LayoutParams params = (WindowManager.LayoutParams) overlayButton.getLayoutParams();
+            WindowManager.LayoutParams params = (WindowManager.LayoutParams) overlayView.getLayoutParams();
 
             int newX = (int) (offsetX + x);
             int newY = (int) (offsetY + y);
@@ -217,16 +243,16 @@ public class OverlayWindowManager
             params.x = newX - (topLeftLocationOnScreen[0]);
             params.y = newY - (topLeftLocationOnScreen[1]);
 
-            windowManager.updateViewLayout(overlayButton, params);
+            windowManager.updateViewLayout(overlayView, params);
             moving = true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             interacting = false;
-            if (moving) {
+            if (moving && overlayMode == OVERLAY_BUTTON) {
                 checkAndResetHiding();
 
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Application.getInstance());
                 SharedPreferences.Editor editor = sp.edit();
-                WindowManager.LayoutParams params = (WindowManager.LayoutParams) overlayButton.getLayoutParams();
+                WindowManager.LayoutParams params = (WindowManager.LayoutParams) overlayView.getLayoutParams();
                 editor.putInt(LAST_POSITION_X, params.x);
                 editor.putInt(LAST_POSITION_Y, params.y);
                 editor.apply();
@@ -234,7 +260,9 @@ public class OverlayWindowManager
             }
         } else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
             interacting = false;
-            checkAndResetHiding();
+            if (overlayMode == OVERLAY_BUTTON) {
+                checkAndResetHiding();
+            }
         }
 
         return false;
@@ -249,7 +277,76 @@ public class OverlayWindowManager
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(Application.getInstance(), "Overlay button click event", Toast.LENGTH_SHORT).show();
+        if (overlayMode == OVERLAY_BUTTON) {
+            if (v.getId() == R.id.translateButton) {
+                hideOverlay(false);
+                showMainOverlay(v.getContext());
+            }
+        }
+        else if (overlayMode == OVERLAY_MAIN) {
+            if (v.getId() == R.id.translateButton) {
+
+            }
+            else if (v.getId() == R.id.closeButton) {
+                hideOverlay(true);
+            }
+        }
+    }
+
+    private void showMainOverlay(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
+            Log.i(TAG, "No permission for overlay");
+            return;
+        }
+        if (overlayMode == OVERLAY_MAIN && overlayView != null) {
+            checkAndResetHiding();
+            return;
+        }
+
+        overlayMode = OVERLAY_MAIN;
+
+        windowManager = (WindowManager) Application.getInstance().getSystemService(Context.WINDOW_SERVICE);
+
+        overlayView = LayoutInflater.from(context).inflate(R.layout.overlay_main, null);
+        Button translateButton = overlayView.findViewById(R.id.translateButton);
+        ImageButton closeButton = overlayView.findViewById(R.id.closeButton);
+        Spinner sourceLanguageSpinner = overlayView.findViewById(R.id.sourceLangSpinner);
+        Spinner targetLanguageSpinner = overlayView.findViewById(R.id.targetLangSpinner);
+
+        Toolbar toolbar = overlayView.findViewById(R.id.toolbar);
+        toolbar.setOnTouchListener(this);
+        translateButton.setOnClickListener(this);
+        closeButton.setOnClickListener(this);
+        sourceLanguageSpinner.setAdapter(new LanguageListAdapter(context, true));
+        targetLanguageSpinner.setAdapter(new LanguageListAdapter(context));
+
+        int permission = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY : WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+
+        int width = (int) (context.getResources().getDimension(R.dimen.overlay_window_width));
+        int height = (int) (context.getResources().getDimension(R.dimen.overlay_window_height));
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+                width,
+                height,
+                permission,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+                PixelFormat.TRANSLUCENT);
+        params.gravity = Gravity.LEFT | Gravity.TOP;
+
+        Point screenSize = new Point();
+        windowManager.getDefaultDisplay().getSize(screenSize);
+        params.x = 0;
+        params.y = screenSize.y - height;
+//        params.x = params.y = 0;
+        windowManager.addView(overlayView, params);
+
+        addAnchorView(context);
+
+        // Animate to show
+        overlayView.setAlpha(0);
+        overlayView.animate()
+                .alpha(1)
+                .setDuration(100);
     }
 
 }
