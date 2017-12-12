@@ -10,20 +10,26 @@ import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.wwk.livetranslator.Application;
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.adapter.LanguageListAdapter;
+
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 
 /**
  * Created by wwk on 11/12/17.
@@ -57,6 +63,12 @@ public class OverlayWindowManager
 
     private Handler hideButtonHandler;
 
+    private TextView sourceText;
+    private TextView targetText;
+    private Spinner sourceLanguageSpinner;
+    private Spinner targetLanguageSpinner;
+    private CircularProgressButton translateButton;
+
     // Private constructor
     private OverlayWindowManager() {
 
@@ -83,8 +95,9 @@ public class OverlayWindowManager
             Log.i(TAG, "No permission for overlay");
             return;
         }
-        if (overlayMode == OVERLAY_BUTTON && overlayView != null) {
-            checkAndResetHiding();
+        if (overlayView != null) { // Do not show overlay if it's shown already
+            if (overlayMode == OVERLAY_BUTTON)
+                checkAndResetHiding();
             return;
         }
 
@@ -201,6 +214,19 @@ public class OverlayWindowManager
         }
     }
 
+    public boolean isMainOverlayShown() {
+        return overlayMode == OVERLAY_MAIN && overlayView != null;
+    }
+
+    public void translateText(String text) {
+        sourceText.setText(text);
+        translateButton.startAnimation();
+        TranslationManager.getInstance().translate(text, (success, translation, detectedLanguage) -> {
+            targetText.setText(translation);
+            translateButton.revertAnimation();
+        });
+    }
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
@@ -281,14 +307,32 @@ public class OverlayWindowManager
             if (v.getId() == R.id.translateButton) {
                 hideOverlay(false);
                 showMainOverlay(v.getContext());
+
+                overlayView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        overlayView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        translateText(TranslationManager.getInstance().getLastText());
+                    }
+                });
             }
         }
         else if (overlayMode == OVERLAY_MAIN) {
             if (v.getId() == R.id.translateButton) {
-
+                translateButton.startAnimation();
+                TranslationManager.getInstance().translate(sourceText.getText().toString(), (success, translation, detectedLanguage) -> {
+                    targetText.setText(translation);
+                    translateButton.revertAnimation();
+                });
             }
             else if (v.getId() == R.id.closeButton) {
                 hideOverlay(true);
+            }
+            else if (v.getId() == R.id.sourceSpeach) {
+                TranslationManager.getInstance().speach(sourceText.getText().toString(), TranslationManager.getInstance().getSourceLanguage());
+            }
+            else if (v.getId() == R.id.targetSpeach) {
+                TranslationManager.getInstance().speach(targetText.getText().toString(), TranslationManager.getInstance().getTargetLanguage());
             }
         }
     }
@@ -308,18 +352,6 @@ public class OverlayWindowManager
         windowManager = (WindowManager) Application.getInstance().getSystemService(Context.WINDOW_SERVICE);
 
         overlayView = LayoutInflater.from(context).inflate(R.layout.overlay_main, null);
-        Button translateButton = overlayView.findViewById(R.id.translateButton);
-        ImageButton closeButton = overlayView.findViewById(R.id.closeButton);
-        Spinner sourceLanguageSpinner = overlayView.findViewById(R.id.sourceLangSpinner);
-        Spinner targetLanguageSpinner = overlayView.findViewById(R.id.targetLangSpinner);
-
-        Toolbar toolbar = overlayView.findViewById(R.id.toolbar);
-        toolbar.setOnTouchListener(this);
-        translateButton.setOnClickListener(this);
-        closeButton.setOnClickListener(this);
-        sourceLanguageSpinner.setAdapter(new LanguageListAdapter(context, true));
-        targetLanguageSpinner.setAdapter(new LanguageListAdapter(context));
-
         int permission = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY : WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
 
@@ -347,6 +379,57 @@ public class OverlayWindowManager
         overlayView.animate()
                 .alpha(1)
                 .setDuration(100);
+
+        setupFields();
+    }
+
+    private void setupFields() {
+        sourceText = overlayView.findViewById(R.id.sourceText);
+        targetText = overlayView.findViewById(R.id.targetText);
+        sourceLanguageSpinner = overlayView.findViewById(R.id.sourceLangSpinner);
+        targetLanguageSpinner = overlayView.findViewById(R.id.targetLangSpinner);
+
+        sourceLanguageSpinner.setAdapter(new LanguageListAdapter(sourceLanguageSpinner.getContext(), true));
+        targetLanguageSpinner.setAdapter(new LanguageListAdapter(targetLanguageSpinner.getContext()));
+
+        sourceLanguageSpinner.setSelection(LanguageListAdapter.getPositionOfLanguage(TranslationManager.getInstance().getSourceLanguage(), true));
+        targetLanguageSpinner.setSelection(LanguageListAdapter.getPositionOfLanguage(TranslationManager.getInstance().getTargetLanguage(), false));
+
+        sourceLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TranslationManager.getInstance().setSourceLanguage(LanguageListAdapter.getItemCode(position, true));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        targetLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TranslationManager.getInstance().setTargetLanguage(LanguageListAdapter.getItemCode(position, false));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        translateButton = overlayView.findViewById(R.id.translateButton);
+        translateButton.setOnClickListener(this);
+        ImageButton closeButton = overlayView.findViewById(R.id.closeButton);
+        closeButton.setOnClickListener(this);
+        FloatingActionButton sourceSpeach = overlayView.findViewById(R.id.sourceSpeach);
+        FloatingActionButton targetSpeach = overlayView.findViewById(R.id.targetSpeach);
+        sourceSpeach.setOnClickListener(this);
+        targetSpeach.setOnClickListener(this);
+        targetText.setKeyListener(null);
+        Toolbar toolbar = overlayView.findViewById(R.id.toolbar);
+        toolbar.setOnTouchListener(this);
     }
 
 }

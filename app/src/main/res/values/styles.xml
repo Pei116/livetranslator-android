@@ -26,14 +26,14 @@
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
-    <style name="Button.Primary.Round" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:background">@drawable/button_primary_round</item>
+    <style name="Button.Primary" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="Button.Overlay.Round" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:background">@drawable/button_overlay_round</item>
+        <item name="android:background">@color/overlayButton</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textAllCaps">false</item>
     </style>

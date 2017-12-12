@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.wwk.livetranslator.Application;
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.manager.TranslationManager;
 
@@ -21,24 +22,17 @@ public class LanguageListAdapter extends BaseAdapter {
     private boolean showAuto;
     private Context context;
 
-    private String[] languageNames;
-    private String[] languageCodes;
+    private static String[] languageNames = TranslationManager.getInstance().getLanguageNames();
+    private static String[] languageCodes = TranslationManager.getInstance().getLanguageCodes();
 
     public LanguageListAdapter(Context context) {
         this.context = context;
         this.showAuto = false;
-        initLanguages();
     }
 
     public LanguageListAdapter(Context context, boolean showAuto) {
         this.context = context;
         this.showAuto = showAuto;
-        initLanguages();
-    }
-
-    private void initLanguages() {
-        languageCodes = TranslationManager.getInstance().getLanguageCodes();
-        languageNames = TranslationManager.getInstance().getLanguageNames();
     }
 
     @Override
@@ -79,28 +73,42 @@ public class LanguageListAdapter extends BaseAdapter {
         text.setEllipsize(TextUtils.TruncateAt.MARQUEE);
 //        text.setAutoSizeTextTypeWithDefaults();
 
-        if (showAuto) {
-            if (position == 0)
-                text.setText(R.string.language_auto);
-            else
-                text.setText(languageNames[position - 1]);
-        }
-        else {
-            text.setText(languageNames[position]);
-        }
+        text.setText(getItemName(position, showAuto));
 
         return view;
     }
 
-    public String getItemCode(int position) {
+    public static String getItemCode(int position, boolean showAuto) {
         if (showAuto) {
             if (position == 0)
-                return context.getString(R.string.language_auto);
+                return null;
+            else
+                return languageCodes[position - 1];
+        }
+        else {
+            return languageCodes[position];
+        }
+    }
+
+    public static String getItemName(int position, boolean showAuto) {
+        if (showAuto) {
+            if (position == 0)
+                return Application.getInstance().getString(R.string.language_auto);
             else
                 return languageNames[position - 1];
         }
         else {
             return languageNames[position];
         }
+    }
+
+    public static int getPositionOfLanguage(String code, boolean showAuto) {
+        for (int i = 0; i < languageCodes.length; i++) {
+            if (languageCodes[i].equals(code)) {
+                return showAuto ? i + 1 : i;
+            }
+        }
+
+        return 0;
     }
 }

@@ -2,8 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:icon="@drawable/ic_settings_white_24dp"
+        android:id="@+id/action_add_bookmark"
+        android:icon="@drawable/ic_bookmark_border"
         android:title="@string/action_settings"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_remove_bookmark"
+        android:icon="@drawable/ic_bookmark_full"
+        android:title="@string/action_remove_bookmark"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_all_bookmarks"
+        android:icon="@drawable/ic_collections_bookmark"
+        android:title="@string/action_all_bookmarks"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom" />
 </menu>

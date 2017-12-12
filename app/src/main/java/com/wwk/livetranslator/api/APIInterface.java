@@ -1,5 +1,7 @@
 package com.wwk.livetranslator.api;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -18,16 +20,16 @@ import retrofit2.http.Query;
 
 public interface APIInterface {
 
-    @GET("enabled")
-    Call enabled();
+    @GET("translate/enabled")
+    Call<JsonObject> enabled();
 
     @FormUrlEncoded
     @POST("translate/text")
     Call<JsonObject> translateViaService(@Field("q") String query, @Field("sl") String sourceLanguage, @Field("tl") String targetLanguage);
 
     @FormUrlEncoded
-    @POST("https://translate.googleapis.com/translate_a/single?client=gtx&dt=dt")
-    Call<Response> translateViaGoogle(@Field("q") String query, @Field("sl") String sourceLanguage, @Field("tl") String targetLanguage);
+    @POST("https://translate.googleapis.com/translate_a/single?client=gtx&dt=t")
+    Call<JsonArray> translateViaGoogle(@Field("q") String query, @Field("sl") String sourceLanguage, @Field("tl") String targetLanguage);
 
     @GET("https://translate.googleapis.com/translate_tts?ie=UTF-8&total=1&idx=0&client=gtx")
     Call<Response> speech(@Query("q") String query, @Query("tl") String targetLanguage, @Query("textlen") String textLength);

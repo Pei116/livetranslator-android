@@ -35,4 +35,3 @@
     <include layout="@layout/partial_translate" />
 
 </android.support.design.widget.CoordinatorLayout>
-

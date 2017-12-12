@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="overlay_window_width">300dp</dimen>
+    <dimen name="overlay_window_width">320dp</dimen>
     <dimen name="overlay_window_height">300dp</dimen>
+    <dimen name="translate_button_width">60dp</dimen>
+    <dimen name="translate_button_height">40dp</dimen>
 </resources>

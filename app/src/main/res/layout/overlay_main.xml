@@ -3,7 +3,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/overlay_window_width"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/overlay_window_height"
     android:fitsSystemWindows="true"
     android:theme="@style/AppTheme.Overlay"

@@ -13,6 +13,7 @@ import com.wwk.livetranslator.helper.BuildInfo;
 import com.wwk.livetranslator.manager.TranslationManager;
 
 import io.fabric.sdk.android.Fabric;
+import io.realm.Realm;
 
 /**
  * Created by Pei on 7/25/17.
@@ -55,6 +56,8 @@ public class Application extends android.app.Application {
         if (!BuildInfo.isDevelopment()) {
             Fabric.with(this, new Crashlytics());
         }
+
+        Realm.init(this);
     }
 
     private boolean isServiceRunning(Class<?> serviceClass) {

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wwk.livetranslator">
 
@@ -36,12 +37,14 @@
             android:noHistory="true" />
         <activity
             android:name=".activity.MainActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
         <service
             android:name=".service.TranslationService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity android:name=".activity.BookmarksActivity" />
     </application>
 
 </manifest>
