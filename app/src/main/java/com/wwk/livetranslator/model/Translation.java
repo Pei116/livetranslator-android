@@ -1,5 +1,7 @@
 package com.wwk.livetranslator.model;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
 
@@ -19,15 +21,19 @@ public class Translation extends RealmObject {
         this.sourceLang = sourceLang;
         this.targetText = targetText;
         this.targetLang = targetLang;
+        this.date = new Date();
     }
 
     @Index
-    String sourceText;
+    public String sourceText;
 
-    String sourceLang;
+    public String sourceLang;
 
-    String targetText;
+    public String targetText;
 
-    String targetLang;
+    public String targetLang;
+
+    @Index
+    public Date date;
 
 }

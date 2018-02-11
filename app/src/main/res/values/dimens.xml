@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="overlay_window_width">320dp</dimen>
     <dimen name="overlay_window_height">300dp</dimen>
     <dimen name="translate_button_width">60dp</dimen>
     <dimen name="translate_button_height">40dp</dimen>
+    <dimen name="design_fab_size_mini" tools:override="true">32dp</dimen>
+    <dimen name="item_delete_icon_margin_right">20dp</dimen>
+    <dimen name="card_radius_small">2dp</dimen>
+    <dimen name="card_elevation_small">2dp</dimen>
 </resources>

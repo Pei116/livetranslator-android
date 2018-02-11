@@ -1,5 +1,7 @@
 package com.wwk.livetranslator.api;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.wwk.livetranslator.Application;
@@ -42,7 +44,7 @@ public class APIClient {
         if (!BuildInfo.isProduction()) {
             // Logging
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(loggingInterceptor);
 
             // SSL
@@ -61,11 +63,18 @@ public class APIClient {
             Request original = chain.request();
             Request.Builder requestBuilder = original.newBuilder();
 
-            requestBuilder.addHeader("Accept", "application/json");
-            requestBuilder.addHeader("X-Client-OS", BuildInfo.osVersion());
-            requestBuilder.addHeader("X-Client-Build", BuildInfo.buildVersion());
-            requestBuilder.addHeader("X-Client-AppName", "WYFI Connect");
-            requestBuilder.addHeader("X-Client-DeviceId", InstallationManager.getInstance().getDeviceId());
+            if (useGoogle) {
+                requestBuilder.addHeader("Accept", "application/json");
+//                requestBuilder.addHeader("User-Agent", "Mozilla/5.0");//System.getProperty("http.agent"));
+                requestBuilder.addHeader("User-Agent", "Mozilla/5.0 (Linux; Android " + BuildInfo.osVersion() + ") AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36");
+            }
+            else {
+                requestBuilder.addHeader("Accept", "application/json");
+                requestBuilder.addHeader("X-Client-OS", BuildInfo.osVersion());
+                requestBuilder.addHeader("X-Client-Build", BuildInfo.buildVersion());
+                requestBuilder.addHeader("X-Client-AppName", "Live Translator");
+                requestBuilder.addHeader("X-Client-DeviceId", InstallationManager.getInstance().getDeviceId());
+            }
 
             return chain.proceed(requestBuilder.build());
         });

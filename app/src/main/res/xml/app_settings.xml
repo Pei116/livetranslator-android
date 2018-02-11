@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="@string/pref_translation">
+
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:key="pref_translation_popup"
+            android:title="@string/pref_translation_popup"
+            android:summary="@string/pref_translation_popup_detail"
+            android:defaultValue="true" />
+
+        <android.support.v7.preference.Preference
+            android:key="pref_languages"
+            android:title="@string/pref_languages"
+            android:summary="@string/pref_languages_detail">
+            <intent android:targetPackage="com.wwk.livetranslator"
+                android:targetClass="com.wwk.livetranslator.activity.LanguagesActivity"/>
+        </android.support.v7.preference.Preference>
+
+    </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="@string/pref_support">
+
+        <android.support.v7.preference.Preference
+            android:title="@string/pref_send_feedback">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="mailto:liudeh@yahoo.com">
+                <extra
+                    android:name="android.intent.extra.SUBJECT"
+                    android:value="Feedback"/>
+                <extra
+                    android:name="android.intent.extra.TEXT"
+                    android:value="Feedback of Live Translator"/>
+            </intent>
+        </android.support.v7.preference.Preference>
+
+        <android.support.v7.preference.Preference
+            android:key="pref_share_app"
+            android:title="@string/pref_share_app">
+        </android.support.v7.preference.Preference>
+
+        <android.support.v7.preference.Preference
+            android:title="@string/pref_rate_app">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="market://details?id=com.google.android.apps.plus"
+                android:launchMode="singleInstance">
+            </intent>
+        </android.support.v7.preference.Preference>
+
+    </android.support.v7.preference.PreferenceCategory>
+
+</android.support.v7.preference.PreferenceScreen>

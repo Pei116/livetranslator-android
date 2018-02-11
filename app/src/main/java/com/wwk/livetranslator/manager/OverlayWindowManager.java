@@ -30,6 +30,7 @@ import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.adapter.LanguageListAdapter;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton;
 
 /**
  * Created by wwk on 11/12/17.
@@ -67,7 +68,7 @@ public class OverlayWindowManager
     private TextView targetText;
     private Spinner sourceLanguageSpinner;
     private Spinner targetLanguageSpinner;
-    private CircularProgressButton translateButton;
+    private CircularProgressImageButton translateButton;
 
     // Private constructor
     private OverlayWindowManager() {

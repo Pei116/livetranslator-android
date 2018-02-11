@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,10 +20,10 @@ import android.widget.TextView;
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.adapter.LanguageListAdapter;
 import com.wwk.livetranslator.helper.Utility;
+import com.wwk.livetranslator.manager.BookmarkManager;
 import com.wwk.livetranslator.manager.OverlayWindowManager;
 import com.wwk.livetranslator.manager.TranslationManager;
 
-import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 translated = bookmarked = false;
+                invalidateOptionsMenu();
             }
 
             @Override
@@ -155,14 +155,24 @@ public class MainActivity extends AppCompatActivity {
                 Utility.makeSnackbar(targetText, R.string.error_translate_first, getResources().getInteger(android.R.integer.config_longAnimTime)).show();
                 return true;
             }
+            String sourceLang = TranslationManager.getInstance().shouldDetectSourceLanguage() ? TranslationManager.getInstance().getDetectedLanguage() : TranslationManager.getInstance().getSourceLanguage();
+            BookmarkManager.getInstance().checkAndAdd(sourceText.getText().toString(), sourceLang, targetText.getText().toString(), TranslationManager.getInstance().getTargetLanguage());
             bookmarked = true;
             invalidateOptionsMenu();
         }
         else if (id == R.id.action_remove_bookmark) {
+            String sourceLang = TranslationManager.getInstance().shouldDetectSourceLanguage() ? TranslationManager.getInstance().getDetectedLanguage() : TranslationManager.getInstance().getSourceLanguage();
+            BookmarkManager.getInstance().remove(sourceText.getText().toString(), sourceLang, targetText.getText().toString(), TranslationManager.getInstance().getTargetLanguage());
             bookmarked = false;
             invalidateOptionsMenu();
         }
+        else if (id == R.id.action_all_bookmarks) {
+            Intent intent = new Intent(this, BookmarksActivity.class);
+            startActivity(intent);
+        }
         else if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
         }
         else {
             return super.onOptionsItemSelected(item);
@@ -196,10 +206,10 @@ public class MainActivity extends AppCompatActivity {
 
         CircularProgressImageButton button = (CircularProgressImageButton) view;
         button.startAnimation();
-        TranslationManager.getInstance().translate(sourceText.getText().toString(), (success, translation, detectedLanguage) -> {
+        TranslationManager.getInstance().translate(text, (success, translation, detectedLanguage) -> {
+            button.revertAnimation();
             if (success) {
                 targetText.setText(translation);
-                button.revertAnimation();
                 translated = true;
             }
         });

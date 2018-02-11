@@ -50,7 +50,7 @@ public class TranslationManager {
 
     private static volatile TranslationManager instance;
 
-    private boolean serviceEnabled = true;
+    private boolean serviceEnabled = false;
     private String sourceLanguage;
     private String targetLanguage;
     private String detectedLanguage;
@@ -75,7 +75,7 @@ public class TranslationManager {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         sourceLanguage = sharedPrefs.getString(PREF_SOURCE_LANGUAGE, "auto");
         targetLanguage = sharedPrefs.getString(PREF_TARGET_LANGUAGE, getCurrentLocale(context));
-        serviceEnabled = sharedPrefs.getBoolean(PREF_SERVICE_ENABLED, true);
+        serviceEnabled = sharedPrefs.getBoolean(PREF_SERVICE_ENABLED, false);
 
         checkServiceEnabled();
     }
@@ -169,7 +169,7 @@ public class TranslationManager {
     }
 
     public boolean shouldDetectSourceLanguage() {
-        return sourceLanguage.equals("auto") && detectedLanguage == null;
+        return sourceLanguage.equals("auto");
     }
 
     public void setTargetLanguage(String newLanguage) {
@@ -330,11 +330,14 @@ public class TranslationManager {
                     if (json != null) {
                         setServiceEnabled(json.get("enabled").getAsBoolean());
                     }
+                } else {
+                    setServiceEnabled(false);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                setServiceEnabled(false);
             }
         });
     }

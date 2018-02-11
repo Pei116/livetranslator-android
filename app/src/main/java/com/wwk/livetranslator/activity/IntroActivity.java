@@ -1,6 +1,5 @@
 package com.wwk.livetranslator.activity;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,6 +12,7 @@ import android.view.View;
 
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.wwk.livetranslator.Constants;
+import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.fragment.IntroSlideFragment;
 
 public class IntroActivity extends AppIntro2 {
@@ -61,7 +61,8 @@ public class IntroActivity extends AppIntro2 {
         editor.apply();
 
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        finish();
     }
 }

@@ -9,6 +9,7 @@ import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -27,6 +28,9 @@ public interface APIInterface {
     @POST("translate/text")
     Call<JsonObject> translateViaService(@Field("q") String query, @Field("sl") String sourceLanguage, @Field("tl") String targetLanguage);
 
+//    @Headers("Content-Type:text/plain;charset=ISO-8859-1;")
+//    @GET("https://translate.googleapis.com/translate_a/single?client=gtx&dt=t")
+//    Call<JsonArray> translateViaGoogle(@Query("q") String query, @Query("sl") String sourceLanguage, @Query("tl") String targetLanguage);
     @FormUrlEncoded
     @POST("https://translate.googleapis.com/translate_a/single?client=gtx&dt=t")
     Call<JsonArray> translateViaGoogle(@Field("q") String query, @Field("sl") String sourceLanguage, @Field("tl") String targetLanguage);
