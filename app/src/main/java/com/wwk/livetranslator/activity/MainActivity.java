@@ -2,11 +2,13 @@ package com.wwk.livetranslator.activity;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.wwk.livetranslator.Constants;
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.adapter.LanguageListAdapter;
 import com.wwk.livetranslator.helper.Utility;
@@ -188,17 +191,33 @@ public class MainActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.M)
     private void checkAndRequestPermission() {
-        if (!Settings.canDrawOverlays(this)) {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        if (settings.getBoolean(Constants.PREF_TRANSLATION_POPUP, true) && !Settings.canDrawOverlays(this)) {
             android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
             alert.setTitle(R.string.permission_ontop_title);
             alert.setMessage(R.string.permission_ontop_rationale);
             alert.setPositiveButton(R.string.action_allow, (dialog, i) -> {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, Constants.INTENT_OVERLAY_SETTINGS);
             });
             alert.setNegativeButton(R.string.action_no_thanks, (dialog, i) -> {
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean(Constants.PREF_TRANSLATION_POPUP, false);
+                editor.apply();
             });
             alert.create().show();
+        }
+    }
+
+    @Override
+    @TargetApi(Build.VERSION_CODES.M)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.INTENT_OVERLAY_SETTINGS) {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean(Constants.PREF_TRANSLATION_POPUP, Settings.canDrawOverlays(this));
+            editor.apply();
         }
     }
 
@@ -220,11 +239,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onSpeachSource(View view) {
+    public void onSpeechSource(View view) {
         TranslationManager.getInstance().speach(sourceText.getText().toString(), TranslationManager.getInstance().getSourceLanguage());
     }
 
-    public void onSpeachTarget(View view) {
+    public void onSpeechTarget(View view) {
         TranslationManager.getInstance().speach(targetText.getText().toString(), TranslationManager.getInstance().getTargetLanguage());
     }
 }

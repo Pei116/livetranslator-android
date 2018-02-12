@@ -15,4 +15,7 @@ public class Constants {
 
     public static final int LANGUAGE_ITEM_FAVORITE = 1;
     public static final int LANGUAGE_ITEM_NORMAL = 2;
+
+    public static final String PREF_TRANSLATION_POPUP = "pref_translation_popup";
+    public static final int INTENT_OVERLAY_SETTINGS = 1;
 }

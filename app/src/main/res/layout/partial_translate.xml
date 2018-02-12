@@ -14,11 +14,10 @@
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:capitalize="sentences"
             android:ems="10"
             android:hint="@string/hint_type_here"
             android:imeActionLabel="@string/action_translate"
-            android:inputType="textMultiLine"
+            android:inputType="textMultiLine|textCapSentences"
             app:layout_constraintBottom_toTopOf="@+id/translateButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.50097847" />
+            app:layout_constraintGuide_percent="0.5" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline3"
@@ -103,7 +102,8 @@
             android:layout_marginEnd="4dp"
             android:alpha="0.9"
             android:clickable="true"
-            android:onClick="onSpeachSource"
+            android:focusable="true"
+            android:onClick="onSpeechSource"
             app:fabSize="mini"
             app:layout_constraintBottom_toBottomOf="@+id/sourceText"
             app:layout_constraintEnd_toEndOf="@+id/sourceText"
@@ -117,7 +117,8 @@
             android:layout_marginEnd="4dp"
             android:alpha="0.9"
             android:clickable="true"
-            android:onClick="onSpeachTarget"
+            android:focusable="true"
+            android:onClick="onSpeechTarget"
             app:fabSize="mini"
             app:layout_constraintBottom_toBottomOf="@+id/targetText"
             app:layout_constraintEnd_toEndOf="@+id/targetText"

@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 import com.github.paolorotolo.appintro.ISlidePolicy;
+import com.wwk.livetranslator.Constants;
 import com.wwk.livetranslator.R;
 
 /**
@@ -150,7 +151,7 @@ public class IntroSlideFragment extends Fragment
             builder.setMessage(R.string.permission_ontop_rationale);
             builder.setPositiveButton(R.string.action_allow, (dialog, i) -> {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getContext().getPackageName()));
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, Constants.INTENT_OVERLAY_SETTINGS);
             });
             builder.setNegativeButton(R.string.action_no_thanks, (dialog, i) -> {
                 permissionIgnored = true;
@@ -163,7 +164,7 @@ public class IntroSlideFragment extends Fragment
     public void onRequestPermission(View view) {
         if (slideNumber == 2 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getContext().getPackageName()));
-            startActivityForResult(intent, 0);
+            startActivityForResult(intent, Constants.INTENT_OVERLAY_SETTINGS);
         }
     }
 
