@@ -4,9 +4,9 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -78,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        targetText.setKeyListener(null);
+    }
+
+    private void setupLanguageSpinners() {
         sourceLanguageSpinner.setAdapter(new LanguageListAdapter(this, true));
         targetLanguageSpinner.setAdapter(new LanguageListAdapter(this));
 
@@ -107,8 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-        targetText.setKeyListener(null);
     }
 
     @Override
@@ -118,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
         if (OverlayWindowManager.getInstance().isMainOverlayShown()) {
             OverlayWindowManager.getInstance().hideOverlay(true);
         }
+
+        setupLanguageSpinners();
     }
 
     @Override

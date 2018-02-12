@@ -1,10 +1,9 @@
 package com.wwk.livetranslator.activity;
 
-import android.graphics.Canvas;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,11 +17,9 @@ import android.widget.TextView;
 import com.wwk.livetranslator.Constants;
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.manager.BookmarkManager;
+import com.wwk.livetranslator.model.Translation;
 import com.wwk.livetranslator.widget.SwipeToDeleteCallback;
 import com.wwk.livetranslator.widget.ZippyListAdapter;
-import com.wwk.livetranslator.model.Translation;
-
-import java.util.List;
 
 public class BookmarksActivity extends AppCompatActivity
     implements ZippyListAdapter.LoadObjectsCallback {

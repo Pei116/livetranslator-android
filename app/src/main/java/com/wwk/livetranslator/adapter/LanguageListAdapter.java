@@ -10,7 +10,10 @@ import android.widget.TextView;
 
 import com.wwk.livetranslator.Application;
 import com.wwk.livetranslator.R;
-import com.wwk.livetranslator.manager.TranslationManager;
+import com.wwk.livetranslator.manager.LanguageManager;
+import com.wwk.livetranslator.model.Language;
+
+import java.util.List;
 
 /**
  * Created by wwk on 11/19/17.
@@ -21,9 +24,6 @@ public class LanguageListAdapter extends BaseAdapter {
 
     private boolean showAuto;
     private Context context;
-
-    private static String[] languageNames = TranslationManager.getInstance().getLanguageNames();
-    private static String[] languageCodes = TranslationManager.getInstance().getLanguageCodes();
 
     public LanguageListAdapter(Context context) {
         this.context = context;
@@ -37,15 +37,21 @@ public class LanguageListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+        List<Language> languages = LanguageManager.getInstance().getMyLanguages();
         if (showAuto)
-            return languageCodes.length + 1;
+            return languages.size() + 1;
 
-        return languageCodes.length;
+        return languages.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        List<Language> languages = LanguageManager.getInstance().getMyLanguages();
+        if (showAuto) {
+            if (position == 0) return null;
+            return languages.get(position - 1);
+        }
+        return languages.get(position);
     }
 
     @Override
@@ -78,37 +84,49 @@ public class LanguageListAdapter extends BaseAdapter {
         return view;
     }
 
+    public static int getPositionOfLanguage(Language language, boolean showAuto) {
+        List<Language> languages = LanguageManager.getInstance().getMyLanguages();
+        int index = languages.indexOf(language);
+        return showAuto ? index + 1 : index;
+    }
+
+    public static int getPositionOfLanguage(String code, boolean showAuto) {
+        List<Language> languages = LanguageManager.getInstance().getMyLanguages();
+        int position = -1;
+        for (int i = 0; i < languages.size(); i++) {
+            Language language = languages.get(i);
+            if (language.equals(code)) {
+                position = i;
+                break;
+            }
+        }
+
+        return showAuto ? position + 1 : position;
+    }
+
     public static String getItemCode(int position, boolean showAuto) {
+        List<Language> languages = LanguageManager.getInstance().getMyLanguages();
         if (showAuto) {
             if (position == 0)
                 return null;
             else
-                return languageCodes[position - 1];
+                return languages.get(position - 1).code;
         }
         else {
-            return languageCodes[position];
+            return languages.get(position).code;
         }
     }
 
     public static String getItemName(int position, boolean showAuto) {
+        List<Language> languages = LanguageManager.getInstance().getMyLanguages();
         if (showAuto) {
             if (position == 0)
                 return Application.getInstance().getString(R.string.language_auto);
             else
-                return languageNames[position - 1];
+                return languages.get(position - 1).name;
         }
         else {
-            return languageNames[position];
+            return languages.get(position).name;
         }
-    }
-
-    public static int getPositionOfLanguage(String code, boolean showAuto) {
-        for (int i = 0; i < languageCodes.length; i++) {
-            if (languageCodes[i].equals(code)) {
-                return showAuto ? i + 1 : i;
-            }
-        }
-
-        return 0;
     }
 }

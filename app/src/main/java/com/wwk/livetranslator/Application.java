@@ -14,6 +14,7 @@ import com.wwk.livetranslator.manager.TranslationManager;
 
 import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * Created by Pei on 7/25/17.
@@ -58,6 +59,15 @@ public class Application extends android.app.Application {
         }
 
         Realm.init(this);
+
+        if (!BuildInfo.isProduction()) {
+            RealmConfiguration config = new RealmConfiguration.Builder()
+                    .deleteRealmIfMigrationNeeded()
+                    .build();
+            Realm.setDefaultConfiguration(config);
+        } else {
+            // TODO: Realm migration in production builds if needed?
+        }
     }
 
     private boolean isServiceRunning(Class<?> serviceClass) {

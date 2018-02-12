@@ -34,6 +34,16 @@ public abstract class SwipeToDeleteCallback
     private final int deleteIconRightMargin;
     private final int cardElevation;
 
+    @Override
+    public boolean isLongPressDragEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isItemViewSwipeEnabled() {
+        return true;
+    }
+
     public SwipeToDeleteCallback(@NotNull Context context) {
         super(0, ItemTouchHelper.LEFT);
         Intrinsics.checkParameterIsNotNull(context, "context");

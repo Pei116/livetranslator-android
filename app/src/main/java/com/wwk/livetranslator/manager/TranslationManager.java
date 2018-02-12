@@ -14,22 +14,15 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.wwk.livetranslator.Application;
 import com.wwk.livetranslator.Constants;
-import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.api.APIClient;
 import com.wwk.livetranslator.api.APIInterface;
 import com.wwk.livetranslator.service.TranslationService;
-
-import org.json.JSONObject;
-
-import java.net.URL;
-import java.net.URLEncoder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,9 +50,6 @@ public class TranslationManager {
     private String lastText;
     MediaPlayer soundPlayer;
 
-    private String[] languageCodes;
-    private String[] languageNames;
-
     // Private constructor
     private TranslationManager() {
 
@@ -69,8 +59,6 @@ public class TranslationManager {
         }
 
         Context context = Application.getInstance();
-        languageCodes = context.getResources().getStringArray(R.array.language_codes);
-        languageNames = context.getResources().getStringArray(R.array.language_names);
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         sourceLanguage = sharedPrefs.getString(PREF_SOURCE_LANGUAGE, "auto");
@@ -198,14 +186,6 @@ public class TranslationManager {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putBoolean(PREF_SERVICE_ENABLED, serviceEnabled);
         editor.apply();
-    }
-
-    public String[] getLanguageCodes() {
-        return languageCodes;
-    }
-
-    public String[] getLanguageNames() {
-        return languageNames;
     }
 
     String getCurrentLocale(Context context){
