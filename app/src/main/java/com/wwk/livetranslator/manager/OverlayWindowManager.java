@@ -29,7 +29,6 @@ import com.wwk.livetranslator.Application;
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.adapter.LanguageListAdapter;
 
-import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton;
 
 /**

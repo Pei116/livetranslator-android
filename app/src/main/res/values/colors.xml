@@ -6,6 +6,7 @@
 
     <color name="overlayButton">#9042a5f5</color>
     <color name="overlayBackground">#cccc</color>
+    <color name="separator">#cccc</color>
 
     <color name="intro_slide_bg_1">#00766c</color>
     <color name="intro_slide_bg_2">#c77800</color>

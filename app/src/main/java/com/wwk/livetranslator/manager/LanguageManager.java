@@ -7,10 +7,7 @@ import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.model.Language;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.realm.Realm;
 import io.realm.RealmResults;

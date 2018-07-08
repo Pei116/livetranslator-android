@@ -2,22 +2,13 @@ package com.wwk.livetranslator.manager;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.wwk.livetranslator.Application;
 import com.wwk.livetranslator.Constants;
-import com.wwk.livetranslator.helper.BuildInfo;
 
-import java.util.TimeZone;
 import java.util.UUID;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by wwk on 8/15/17.

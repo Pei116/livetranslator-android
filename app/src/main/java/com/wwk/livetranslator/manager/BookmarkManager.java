@@ -1,8 +1,5 @@
 package com.wwk.livetranslator.manager;
 
-import android.support.annotation.NonNull;
-
-import com.wwk.livetranslator.Constants;
 import com.wwk.livetranslator.model.Translation;
 
 import java.util.ArrayList;
@@ -10,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import io.realm.Sort;
 

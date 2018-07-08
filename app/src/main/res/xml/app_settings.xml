@@ -47,7 +47,7 @@
             android:title="@string/pref_rate_app">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="market://details?id=com.google.android.apps.plus"
+                android:data="market://details?id=com.wwk.livetranslator"
                 android:launchMode="singleInstance">
             </intent>
         </android.support.v7.preference.Preference>
