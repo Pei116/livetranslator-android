@@ -87,7 +87,7 @@ public class TranslationManager {
             if (clipData != null && clipData.getItemCount() > 0) {
                 CharSequence chars = clipData.getItemAt(clipData.getItemCount() - 1).getText();
                 if (chars != null) {
-                    lastText = clipData.getItemAt(clipData.getItemCount() - 1).getText().toString();
+                    lastText = chars.toString();
 
                     if (OverlayWindowManager.getInstance().isMainOverlayShown()) {
                         OverlayWindowManager.getInstance().translateText(lastText);
@@ -262,12 +262,12 @@ public class TranslationManager {
         }
     }
 
-    public void speach(String text, String language) {
+    public void speech(String text, String language) {
         if (language.equals("auto")) {
             if (detectedLanguage == null) {
                 translate(text, (success, translation, detectedLanguage) -> {
                     if (detectedLanguage != null)
-                        speach(text, detectedLanguage);
+                        speech(text, detectedLanguage);
                 });
                 return;
             }

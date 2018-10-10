@@ -328,11 +328,11 @@ public class OverlayWindowManager
             else if (v.getId() == R.id.closeButton) {
                 hideOverlay(true);
             }
-            else if (v.getId() == R.id.sourceSpeach) {
-                TranslationManager.getInstance().speach(sourceText.getText().toString(), TranslationManager.getInstance().getSourceLanguage());
+            else if (v.getId() == R.id.sourceSpeech) {
+                TranslationManager.getInstance().speech(sourceText.getText().toString(), TranslationManager.getInstance().getSourceLanguage());
             }
-            else if (v.getId() == R.id.targetSpeach) {
-                TranslationManager.getInstance().speach(targetText.getText().toString(), TranslationManager.getInstance().getTargetLanguage());
+            else if (v.getId() == R.id.targetSpeech) {
+                TranslationManager.getInstance().speech(targetText.getText().toString(), TranslationManager.getInstance().getTargetLanguage());
             }
         }
     }
@@ -421,14 +421,16 @@ public class OverlayWindowManager
 
         translateButton = overlayView.findViewById(R.id.translateButton);
         translateButton.setOnClickListener(this);
-        ImageButton closeButton = overlayView.findViewById(R.id.closeButton);
+        final ImageButton closeButton = overlayView.findViewById(R.id.closeButton);
         closeButton.setOnClickListener(this);
-        FloatingActionButton sourceSpeach = overlayView.findViewById(R.id.sourceSpeach);
-        FloatingActionButton targetSpeach = overlayView.findViewById(R.id.targetSpeach);
-        sourceSpeach.setOnClickListener(this);
-        targetSpeach.setOnClickListener(this);
+        final FloatingActionButton sourceSpeech = overlayView.findViewById(R.id.sourceSpeech);
+        final FloatingActionButton targetSpeech = overlayView.findViewById(R.id.targetSpeech);
+        sourceSpeech.setOnClickListener(this);
+        targetSpeech.setOnClickListener(this);
+        final FloatingActionButton pasteButton = overlayView.findViewById(R.id.sourcePaste);
+        pasteButton.setVisibility(View.GONE);
         targetText.setKeyListener(null);
-        Toolbar toolbar = overlayView.findViewById(R.id.toolbar);
+        final Toolbar toolbar = overlayView.findViewById(R.id.toolbar);
         toolbar.setOnTouchListener(this);
     }
 

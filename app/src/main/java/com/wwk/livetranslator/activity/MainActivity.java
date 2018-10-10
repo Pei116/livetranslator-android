@@ -1,6 +1,9 @@
 package com.wwk.livetranslator.activity;
 
 import android.annotation.TargetApi;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -19,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.wwk.livetranslator.Application;
 import com.wwk.livetranslator.Constants;
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.adapter.LanguageListAdapter;
@@ -240,10 +244,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSpeechSource(View view) {
-        TranslationManager.getInstance().speach(sourceText.getText().toString(), TranslationManager.getInstance().getSourceLanguage());
+        TranslationManager.getInstance().speech(sourceText.getText().toString(), TranslationManager.getInstance().getSourceLanguage());
     }
 
     public void onSpeechTarget(View view) {
-        TranslationManager.getInstance().speach(targetText.getText().toString(), TranslationManager.getInstance().getTargetLanguage());
+        TranslationManager.getInstance().speech(targetText.getText().toString(), TranslationManager.getInstance().getTargetLanguage());
+    }
+
+    public void onPasteSource(View view) {
+        final ClipboardManager clipboardManager = (ClipboardManager) Application.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        if (clipboardManager != null) {
+            ClipData clipData = clipboardManager.getPrimaryClip();
+            if (clipData != null && clipData.getItemCount() > 0) {
+                CharSequence chars = clipData.getItemAt(clipData.getItemCount() - 1).getText();
+                if (chars != null) {
+                    sourceText.setText(chars);
+                }
+            }
+        }
     }
 }

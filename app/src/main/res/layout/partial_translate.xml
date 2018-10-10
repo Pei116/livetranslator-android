@@ -22,7 +22,8 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -74,10 +75,7 @@
                 android:onClick="onTranslate"
                 android:src="@drawable/ic_translate"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toTopOf="@+id/guideline2"
-                app:layout_constraintVertical_bias="0.5"
                 app:spinning_bar_color="@color/colorAccent" />
 
             <Spinner
@@ -118,7 +116,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        android:importantForAutofill="no" />
 
     <android.support.constraint.Guideline
             android:id="@+id/guideline2"
@@ -128,33 +127,48 @@
             app:layout_constraintGuide_percent="0.5" />
 
     <android.support.design.widget.FloatingActionButton
-            android:id="@+id/sourceSpeach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="4dp"
-            android:alpha="0.9"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="onSpeechSource"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toBottomOf="@+id/sourceText"
-            app:layout_constraintEnd_toEndOf="@+id/sourceText"
-            app:srcCompat="@drawable/ic_sound" />
+        android:id="@+id/sourcePaste"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="4dp"
+        android:alpha="0.9"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onPasteSource"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@+id/sourceText"
+        app:layout_constraintStart_toStartOf="@+id/sourceText"
+        app:srcCompat="@drawable/ic_content_paste" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/targetSpeach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="4dp"
-            android:alpha="0.9"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="onSpeechTarget"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toBottomOf="@+id/targetText"
-            app:layout_constraintEnd_toEndOf="@+id/targetText"
-            app:srcCompat="@drawable/ic_sound" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/sourceSpeech"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="4dp"
+        android:alpha="0.9"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onSpeechSource"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@+id/sourceText"
+        app:layout_constraintEnd_toEndOf="@+id/sourceText"
+        app:srcCompat="@drawable/ic_sound" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/targetSpeech"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="4dp"
+        android:alpha="0.9"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onSpeechTarget"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@+id/targetText"
+        app:layout_constraintEnd_toEndOf="@+id/targetText"
+        app:srcCompat="@drawable/ic_sound" />
 
 </android.support.constraint.ConstraintLayout>
