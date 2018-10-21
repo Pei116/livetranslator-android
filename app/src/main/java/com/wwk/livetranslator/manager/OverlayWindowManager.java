@@ -305,7 +305,6 @@ public class OverlayWindowManager
     public void onClick(View v) {
         if (overlayMode == OVERLAY_BUTTON) {
             if (v.getId() == R.id.translateButton) {
-                hideOverlay(false);
                 showMainOverlay(v.getContext());
 
                 overlayView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -335,6 +334,16 @@ public class OverlayWindowManager
                 TranslationManager.getInstance().speech(targetText.getText().toString(), TranslationManager.getInstance().getTargetLanguage());
             }
         }
+    }
+
+    public void checkAndShowMainOverlay(Context context) {
+        if (overlayMode == OVERLAY_MAIN || Application.getInstance().isInForeground()) {
+            return;
+        } else if (overlayMode == OVERLAY_BUTTON) {
+            hideOverlay(false);
+        }
+
+        showMainOverlay(context);
     }
 
     private void showMainOverlay(Context context) {

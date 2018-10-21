@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -48,7 +49,7 @@ public class TranslationManager {
     private String targetLanguage;
     private String detectedLanguage;
     private String lastText;
-    MediaPlayer soundPlayer;
+    private MediaPlayer soundPlayer;
 
     // Private constructor
     private TranslationManager() {
@@ -135,6 +136,19 @@ public class TranslationManager {
             Log.d(TAG, "Scheduling translator job...");
             jobScheduler.schedule(builder.build());
         }
+    }
+
+    public void startService(Context context) {
+        Intent intent = new Intent(context, TranslationService.class);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(intent);
+        } else {
+            context.startService(intent);
+        }
+//        Intent startIntent = new Intent(context, TranslationService.class);
+//        startIntent.setAction(Constants.ACTION_START_SERVICE);
+//        context.startService(startIntent);
     }
 
     public void setSourceLanguage(String newLanguage) {

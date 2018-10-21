@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         initLayout();
+        TranslationManager.getInstance().startService(this);
     }
 
     private void initLayout() {

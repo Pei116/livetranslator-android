@@ -52,8 +52,6 @@ public class Application extends android.app.Application {
         lifecycleCallbacks = new MyActivityLifecycleCallbacks();
         registerActivityLifecycleCallbacks(lifecycleCallbacks);
 
-        TranslationManager.getInstance().scheduleJob(this);
-
         if (!BuildInfo.isDevelopment()) {
             Fabric.with(this, new Crashlytics());
         }

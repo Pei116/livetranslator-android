@@ -18,4 +18,7 @@ public class Constants {
 
     public static final String PREF_TRANSLATION_POPUP = "pref_translation_popup";
     public static final int INTENT_OVERLAY_SETTINGS = 1;
+
+    public static final String ACTION_OPEN_SERVICE = "action_open_service";
+    public static final String ACTION_STOP_SERVICE = "action_stop_service";
 }

@@ -43,6 +43,10 @@
     <string name="pref_share_app">Share App</string>
     <string name="pref_rate_app">Rate App</string>
 
+    <string name="notification_title">Live Translator is running</string>
+    <string name="notification_open">Tap to open</string>
+    <string name="action_stop">Stop</string>
+
     <!--Languages-->
     <string-array name="language_codes">
         <item>en</item>
