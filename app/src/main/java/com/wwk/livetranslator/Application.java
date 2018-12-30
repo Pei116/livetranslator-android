@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.util.Log;
@@ -102,8 +103,14 @@ public class Application extends android.app.Application {
 
         public void onActivityCreated(Activity activity, Bundle bundle) {
             Log.i(TAG, "onActivityCreated:" + activity.getLocalClassName());
-            // Force activities in portrait mode only
-            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+            // Force activities in portrait mode in smaller screens
+            final int screenSize = getResources().getConfiguration().screenLayout
+                    & Configuration.SCREENLAYOUT_SIZE_MASK;
+            if (screenSize == Configuration.SCREENLAYOUT_SIZE_SMALL
+                    || screenSize == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
         }
 
         public void onActivityDestroyed(Activity activity) {
