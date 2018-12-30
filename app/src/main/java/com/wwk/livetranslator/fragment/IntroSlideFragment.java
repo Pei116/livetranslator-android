@@ -84,15 +84,15 @@ public class IntroSlideFragment extends Fragment
         if (slideNumber == 1) {
             titleView.setText(R.string.intro_title_1);
             detailView.setText(R.string.intro_detail_1);
-            imageView.setImageResource(R.mipmap.ic_launcher);
+            imageView.setImageResource(R.drawable.img_globe);
         } else if (slideNumber == 2) {
             titleView.setText(R.string.intro_title_2);
             detailView.setText(R.string.intro_detail_2);
-            imageView.setImageResource(R.mipmap.ic_launcher);
+            imageView.setImageResource(R.drawable.img_languages);
         } else if (slideNumber == 3) {
             titleView.setText(R.string.intro_title_3);
             detailView.setText(R.string.intro_detail_3);
-            imageView.setImageResource(R.mipmap.ic_launcher);
+            imageView.setImageResource(R.drawable.img_headphone);
         }
     }
 

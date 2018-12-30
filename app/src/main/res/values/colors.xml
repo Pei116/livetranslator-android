@@ -4,13 +4,16 @@
     <color name="colorPrimaryDark">#0077c2</color>
     <color name="colorAccent">#ff8a65</color>
 
-    <color name="overlayButton">#9042a5f5</color>
+    <color name="overlayButton">#C042a5f5</color>
     <color name="overlayBackground">#cccc</color>
     <color name="separator">#cccc</color>
 
-    <color name="intro_slide_bg_1">#00766c</color>
-    <color name="intro_slide_bg_2">#c77800</color>
-    <color name="intro_slide_bg_3">#4b636e</color>
+    <color name="intro_slide_bg_1">#42a5f5</color>
+    <color name="intro_slide_bg_2">#37cfb1</color>
+    <color name="intro_slide_bg_3">#ff8a6a</color>
+    <color name="intro_slide_img_1">#80d6ff</color>
+    <color name="intro_slide_img_2">#75ffe3</color>
+    <color name="intro_slide_img_3">#ffbb99</color>
 
     <color name="grayLight">#D8D8D8</color>
     <color name="redLight">#f44336</color>

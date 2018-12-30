@@ -1,6 +1,7 @@
 package com.wwk.livetranslator.fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -12,6 +13,7 @@ import android.support.v7.preference.SwitchPreferenceCompat;
 
 import com.wwk.livetranslator.Constants;
 import com.wwk.livetranslator.R;
+import com.wwk.livetranslator.manager.TranslationManager;
 
 /**
  * Created by Pei on 2/11/18.
@@ -33,7 +35,7 @@ public class SettingsFragment extends PreferenceFragment {
         sharePreference.setOnPreferenceClickListener(preference1 -> {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SEND);
-            intent.putExtra(Intent.EXTRA_TEXT, "Check Live Translator app: https://play.google.com/store/apps/details?id=com.google.android.apps.plus");
+            intent.putExtra(Intent.EXTRA_TEXT, "Check Live Translator app: https://play.google.com/store/apps/details?id=com.wwk.livetranslator");
             intent.setType("text/plain");
             startActivity(intent);
             return true;
@@ -54,8 +56,9 @@ public class SettingsFragment extends PreferenceFragment {
                 builder.setOnCancelListener(dialog -> overlayPreference.setChecked(false));
                 AlertDialog dialog = builder.create();
                 dialog.show();
-
+                return true;
             }
+            toggleOverlayService(checked);
             return true;
         });
     }
@@ -64,9 +67,22 @@ public class SettingsFragment extends PreferenceFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == Constants.INTENT_OVERLAY_SETTINGS && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(getContext())) {
-            SwitchPreferenceCompat overlayPreference = (SwitchPreferenceCompat) findPreference(Constants.PREF_TRANSLATION_POPUP);
-            overlayPreference.setChecked(false);
+        if (requestCode == Constants.INTENT_OVERLAY_SETTINGS) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(getContext())) {
+                SwitchPreferenceCompat overlayPreference = (SwitchPreferenceCompat) findPreference(Constants.PREF_TRANSLATION_POPUP);
+                overlayPreference.setChecked(false);
+                return;
+            }
+            toggleOverlayService(true);
+        }
+    }
+
+    private void toggleOverlayService(boolean enabled) {
+        final Context context = getActivity();
+        if (enabled) {
+            TranslationManager.getInstance().startService(context);
+        } else {
+            TranslationManager.getInstance().stopService(context);
         }
     }
 }

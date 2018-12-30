@@ -151,6 +151,11 @@ public class TranslationManager {
 //        context.startService(startIntent);
     }
 
+    public void stopService(Context context) {
+        Intent intent = new Intent(context, TranslationService.class);
+        context.stopService(intent);
+    }
+
     public void setSourceLanguage(String newLanguage) {
         if (newLanguage == null) {
             newLanguage = "auto";

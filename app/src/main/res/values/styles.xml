@@ -32,10 +32,8 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="Button.Overlay.Round" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:background">@color/overlayButton</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textAllCaps">false</item>
+    <style name="Button.Overlay.Round" parent="@android:style/Widget.ImageButton">
+        <item name="android:background">@drawable/button_overlay_round</item>
     </style>
 
     <style name="Button.Image" parent="@android:style/Widget.ImageButton">

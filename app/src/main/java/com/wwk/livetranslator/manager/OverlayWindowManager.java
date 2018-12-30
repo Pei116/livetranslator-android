@@ -29,6 +29,8 @@ import com.wwk.livetranslator.Application;
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.adapter.LanguageListAdapter;
 
+import java.lang.reflect.Field;
+
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton;
 
 /**
@@ -110,7 +112,7 @@ public class OverlayWindowManager
         windowManager = (WindowManager) Application.getInstance().getSystemService(Context.WINDOW_SERVICE);
 
         overlayView = LayoutInflater.from(context).inflate(R.layout.overlay_button, null);
-        Button translateButton = overlayView.findViewById(R.id.translateButton);
+        ImageButton translateButton = overlayView.findViewById(R.id.translateButton);
         translateButton.setOnTouchListener(this);
         translateButton.setOnClickListener(this);
 
@@ -305,6 +307,7 @@ public class OverlayWindowManager
     public void onClick(View v) {
         if (overlayMode == OVERLAY_BUTTON) {
             if (v.getId() == R.id.translateButton) {
+                hideOverlay(false);
                 showMainOverlay(v.getContext());
 
                 overlayView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -441,6 +444,17 @@ public class OverlayWindowManager
         targetText.setKeyListener(null);
         final Toolbar toolbar = overlayView.findViewById(R.id.toolbar);
         toolbar.setOnTouchListener(this);
+    }
+
+    private void limitSpinnerHeight(Spinner spinner, int height) {
+        try {
+            Field popup = Spinner.class.getDeclaredField("mPopup");
+            popup.setAccessible(true);
+            android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(spinner);
+            popupWindow.setHeight(height);
+        } catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
+            // silently fail...
+        }
     }
 
 }

@@ -55,7 +55,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         initLayout();
-        TranslationManager.getInstance().startService(this);
+        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        if (settings.getBoolean(Constants.PREF_TRANSLATION_POPUP, false)) {
+            TranslationManager.getInstance().startService(this);
+        }
     }
 
     private void initLayout() {
@@ -197,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.M)
     private void checkAndRequestPermission() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        if (settings.getBoolean(Constants.PREF_TRANSLATION_POPUP, true) && !Settings.canDrawOverlays(this)) {
+        if (settings.getBoolean(Constants.PREF_TRANSLATION_POPUP, false) && !Settings.canDrawOverlays(this)) {
             android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
             alert.setTitle(R.string.permission_ontop_title);
             alert.setMessage(R.string.permission_ontop_rationale);

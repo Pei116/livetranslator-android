@@ -26,15 +26,16 @@ android {
         dev {
             dimension "target"
             versionNameSuffix '-dev'
-            buildConfigField "String", "API_BASE_URL", "\"https://192.168.0.2:3443/api/v1.0/\""
+            buildConfigField "String", "API_BASE_URL", "\"http://192.168.0.11:3000/api/v1.0/\""
         }
         staging {
             dimension "target"
             versionNameSuffix '-test'
-            buildConfigField "String", "API_BASE_URL", "\"https://ec2-34-213-209-211.us-west-2.compute.amazonaws.com/api/v1/\""
+            buildConfigField "String", "API_BASE_URL", "\"https://ec2-54-183-203-169.us-west-1.compute.amazonaws.com/api/v1/\""
         }
         live {
             dimension "target"
+            buildConfigField "String", "API_BASE_URL", "\"https://ec2-54-183-203-169.us-west-1.compute.amazonaws.com/api/v1/\""
         }
     }
 }

@@ -9,9 +9,9 @@
     <string name="intro_title_2">Live Translation</string>
     <string name="intro_title_3">Listen to Translation</string>
 
-    <string name="intro_detail_1">Configure and distribute your Wi-Fi networks.</string>
-    <string name="intro_detail_2">Invite your friends to your Wi-Fi so that they can connect without typing password.</string>
-    <string name="intro_detail_3">Discover and connect to Wi-Fis wherever you go all around the globe.</string>
+    <string name="intro_detail_1">Translate 15 languages to each other, not only words but also long phrases and sentences.</string>
+    <string name="intro_detail_2">Anytime anywhere translate what you\'re reading on your phone or tablet by simply copying any text.</string>
+    <string name="intro_detail_3">Doubt on pronunciation? You\'ve got it for any phrase you want to translate to and from.</string>
 
     <string name="action_translate">Translate</string>
     <string name="action_settings">Settings</string>
@@ -26,7 +26,7 @@
     <string name="permission_ontop_rationale">Allow permission to translate on top of other apps.</string>
 
     <string name="hint_type_here">Type here</string>
-    <string name="hint_translation">Translation</string>
+    <string name="hint_translation">Translation goes here</string>
 
     <string name="error_type_text_first">Please type or paste text first.</string>
     <string name="error_translate_first">Please translate first and add bookmark.</string>
@@ -38,333 +38,51 @@
     <string name="pref_translation_popup_detail">Shows translation popup when you copy a text.</string>
     <string name="pref_languages">Languages</string>
     <string name="pref_languages_detail">Choose languages you\'re looking for.</string>
-    <string name="pref_support">Supoort</string>
+    <string name="pref_support">Support</string>
     <string name="pref_send_feedback">Send Feedback</string>
     <string name="pref_share_app">Share App</string>
     <string name="pref_rate_app">Rate App</string>
 
     <string name="notification_title">Live Translator is running</string>
-    <string name="notification_open">Tap to open</string>
+    <string name="notification_open">Copy text to translate</string>
     <string name="action_stop">Stop</string>
+    <string name="language_auto">- Auto Detect -</string>
+    <string name="action_permission">Request Permission</string>
 
     <!--Languages-->
     <string-array name="language_codes">
         <item>en</item>
-        <item>af</item>
-        <item>sq</item>
-        <item>am</item>
-        <item>ar</item>
-        <item>hy</item>
-        <item>az</item>
-        <item>eu</item>
-        <item>be</item>
-        <item>bn</item>
-        <item>bs</item>
-        <item>bg</item>
-        <item>ca</item>
-        <item>ceb</item>
         <item>zh-CN</item>
         <item>zh-TW</item>
-        <item>co</item>
-        <item>hr</item>
-        <item>cs</item>
-        <item>da</item>
-        <item>nl</item>
         <item>eo</item>
-        <item>et</item>
-        <item>fi</item>
         <item>fr</item>
-        <item>fy</item>
-        <item>gl</item>
-        <item>ka</item>
-        <item>de</item>
-        <item>el</item>
-        <item>gu</item>
-        <item>ht</item>
-        <item>ha</item>
-        <item>haw</item>
-        <item>iw</item>
-        <item>hi</item>
-        <item>hmn</item>
-        <item>hu</item>
-        <item>is</item>
-        <item>ig</item>
-        <item>id</item>
-        <item>ga</item>
         <item>it</item>
         <item>ja</item>
-        <item>jw</item>
-        <item>kn</item>
-        <item>kk</item>
-        <item>km</item>
         <item>ko</item>
-        <item>ku</item>
-        <item>ky</item>
-        <item>lo</item>
-        <item>la</item>
-        <item>lv</item>
-        <item>lt</item>
-        <item>lb</item>
-        <item>mk</item>
-        <item>mg</item>
-        <item>ms</item>
-        <item>ml</item>
-        <item>mt</item>
-        <item>mi</item>
-        <item>mr</item>
-        <item>mn</item>
-        <item>my</item>
-        <item>ne</item>
-        <item>no</item>
-        <item>ny</item>
-        <item>ps</item>
-        <item>fa</item>
-        <item>pl</item>
-        <item>pt</item>
-        <item>pa</item>
-        <item>ro</item>
         <item>ru</item>
-        <item>sm</item>
-        <item>gd</item>
-        <item>sr</item>
-        <item>st</item>
-        <item>sn</item>
-        <item>sd</item>
-        <item>si</item>
-        <item>sk</item>
-        <item>sl</item>
-        <item>so</item>
         <item>es</item>
-        <item>su</item>
-        <item>sw</item>
-        <item>sv</item>
-        <item>tl</item>
-        <item>tg</item>
-        <item>ta</item>
-        <item>te</item>
-        <item>th</item>
-        <item>tr</item>
-        <item>uk</item>
-        <item>ur</item>
-        <item>uz</item>
-        <item>vi</item>
-        <item>cy</item>
-        <item>xh</item>
-        <item>yi</item>
-        <item>yo</item>
-        <item>zu</item>
+        <item>pt</item>
+        <item>ar</item>
+        <item>bn</item>
+        <item>hi</item>
+        <item>de</item>
     </string-array>
     <string-array name="language_names">
         <item>English</item>
-        <item>Afrikaans</item>
-        <item>Shqip</item>
-        <item>አማርኛ</item>
-        <item>العربية</item>
-        <item>Հայերեն</item>
-        <item>azərbaycan dili</item>
-        <item>euskara</item>
-        <item>беларуская мова</item>
-        <item>বাংলা</item>
-        <item>bosanski jezik</item>
-        <item>български език</item>
-        <item>català</item>
-        <item>нохчийн мотт</item>
         <item>简体中文</item>
         <item>繁體中文</item>
-        <item>corsu</item>
-        <item>hrvatski jezik</item>
-        <item>čeština</item>
-        <item>dansk</item>
-        <item>Nederlands</item>
         <item>Esperanto</item>
-        <item>eesti</item>
-        <item>suomi</item>
         <item>français</item>
-        <item>Frysk</item>
-        <item>Galego</item>
-        <item>ქართული</item>
-        <item>Deutsch</item>
-        <item>ελληνικά</item>
-        <item>ગુજરાતી</item>
-        <item>Kreyòl ayisyen</item>
-        <item>(Hausa) هَوُسَ</item>
-        <item>Ōlelo Hawaiʻi</item>
-        <item>עברית</item>
-        <item>हिन्दी</item>
-        <item>Hmoob</item>
-        <item>magyar</item>
-        <item>Íslenska</item>
-        <item>Asụsụ Igbo</item>
-        <item>Bahasa Indonesia</item>
-        <item>Gaeilge</item>
         <item>Italiano</item>
         <item>日本語</item>
-        <item>Basa Jawa</item>
-        <item>ಕನ್ನಡ</item>
-        <item>қазақ тілі</item>
-        <item>ខ្មែរ</item>
         <item>한국어</item>
-        <item>Kurdî</item>
-        <item>Кыргызча</item>
-        <item>ພາສາລາວ</item>
-        <item>latine</item>
-        <item>latviešu valoda</item>
-        <item>lietuvių kalba</item>
-        <item>Lëtzebuergesch</item>
-        <item>македонски јазик</item>
-        <item>fiteny malagasy</item>
-        <item>Bahasa Melayu</item>
-        <item>മലയാളം</item>
-        <item>Malti</item>
-        <item>te reo Māori</item>
-        <item>मराठी</item>
-        <item>Монгол хэл</item>
-        <item>ဗမာစာ</item>
-        <item>नेपाली</item>
-        <item>Norsk</item>
-        <item>chiCheŵa</item>
-        <item>پښتو</item>
-        <item>فارسی</item>
-        <item>język polski</item>
-        <item>Português</item>
-        <item>ਪੰਜਾਬੀ</item>
-        <item>Română</item>
         <item>русский</item>
-        <item>gagana fa\'a Samoa</item>
-        <item>Gàidhlig</item>
-        <item>српски језик</item>
-        <item>Sesotho</item>
-        <item>chiShona</item>
-        <item>सिन्धी</item>
-        <item>සිංහල</item>
-        <item>Slovenčina</item>
-        <item>Slovenski Jezik</item>
-        <item>Soomaaliga</item>
         <item>Español</item>
-        <item>Basa Sunda</item>
-        <item>Kiswahili</item>
-        <item>Svenska</item>
-        <item>Wikang Tagalog</item>
-        <item>тоҷикӣ</item>
-        <item>தமிழ்</item>
-        <item>తెలుగు</item>
-        <item>ไทย</item>
-        <item>Türkçe</item>
-        <item>Українська</item>
-        <item>اردو</item>
-        <item>Oʻzbek</item>
-        <item>Tiếng Việt</item>
-        <item>Cymraeg</item>
-        <item>isiXhosa</item>
-        <item>ייִדיש</item>
-        <item>Yorùbá</item>
-        <item>isiZulu</item>
+        <item>Português</item>
+        <item>العربية</item>
+        <item>বাংলা</item>
+        <item>हिन्दी</item>
+        <item>Deutsch</item>
     </string-array>
-    <string name="language_auto">- Auto Detect -</string>
-    <string name="action_permission">Request Permission</string>
 
-    <!--Afrikaans	af-->
-    <!--Albanian	sq-->
-    <!--Amharic	am-->
-    <!--Arabic	ar-->
-    <!--Armenian	hy-->
-    <!--Azeerbaijani	az-->
-    <!--Basque	eu-->
-    <!--Belarusian	be-->
-    <!--Bengali	bn-->
-    <!--Bosnian	bs-->
-    <!--Bulgarian	bg-->
-    <!--Catalan	ca-->
-    <!--Cebuano	ceb (ISO-639-2)-->
-    <!--Chinese (Simplified)	zh-CN (BCP-47)-->
-    <!--Chinese (Traditional)	zh-TW (BCP-47)-->
-    <!--Corsican	co-->
-    <!--Croatian	hr-->
-    <!--Czech	cs-->
-    <!--Danish	da-->
-    <!--Dutch	nl-->
-    <!--English	en-->
-    <!--Esperanto	eo-->
-    <!--Estonian	et-->
-    <!--Finnish	fi-->
-    <!--French	fr-->
-    <!--Frisian	fy-->
-    <!--Galician	gl-->
-    <!--Georgian	ka-->
-    <!--German	de-->
-    <!--Greek	el-->
-    <!--Gujarati	gu-->
-    <!--Haitian Creole	ht-->
-    <!--Hausa	ha-->
-    <!--Hawaiian	haw (ISO-639-2)-->
-    <!--Hebrew	iw-->
-    <!--Hindi	hi-->
-    <!--Hmong	hmn (ISO-639-2)-->
-    <!--Hungarian	hu-->
-    <!--Icelandic	is-->
-    <!--Igbo	ig-->
-    <!--Indonesian	id-->
-    <!--Irish	ga-->
-    <!--Italian	it-->
-    <!--Japanese	ja-->
-    <!--Javanese	jw-->
-    <!--Kannada	kn-->
-    <!--Kazakh	kk-->
-    <!--Khmer	km-->
-    <!--Korean	ko-->
-    <!--Kurdish	ku-->
-    <!--Kyrgyz	ky-->
-    <!--Lao	lo-->
-    <!--Latin	la-->
-    <!--Latvian	lv-->
-    <!--Lithuanian	lt-->
-    <!--Luxembourgish	lb-->
-    <!--Macedonian	mk-->
-    <!--Malagasy	mg-->
-    <!--Malay	ms-->
-    <!--Malayalam	ml-->
-    <!--Maltese	mt-->
-    <!--Maori	mi-->
-    <!--Marathi	mr-->
-    <!--Mongolian	mn-->
-    <!--Myanmar (Burmese)	my-->
-    <!--Nepali	ne-->
-    <!--Norwegian	no-->
-    <!--Nyanja (Chichewa)	ny-->
-    <!--Pashto	ps-->
-    <!--Persian	fa-->
-    <!--Polish	pl-->
-    <!--Portuguese (Portugal, Brazil)	pt-->
-    <!--Punjabi	pa-->
-    <!--Romanian	ro-->
-    <!--Russian	ru-->
-    <!--Samoan	sm-->
-    <!--Scots Gaelic	gd-->
-    <!--Serbian	sr-->
-    <!--Sesotho	st-->
-    <!--Shona	sn-->
-    <!--Sindhi	sd-->
-    <!--Sinhala (Sinhalese)	si-->
-    <!--Slovak	sk-->
-    <!--Slovenian	sl-->
-    <!--Somali	so-->
-    <!--Spanish	es-->
-    <!--Sundanese	su-->
-    <!--Swahili	sw-->
-    <!--Swedish	sv-->
-    <!--Tagalog (Filipino)	tl-->
-    <!--Tajik	tg-->
-    <!--Tamil	ta-->
-    <!--Telugu	te-->
-    <!--Thai	th-->
-    <!--Turkish	tr-->
-    <!--Ukrainian	uk-->
-    <!--Urdu	ur-->
-    <!--Uzbek	uz-->
-    <!--Vietnamese	vi-->
-    <!--Welsh	cy-->
-    <!--Xhosa	xh-->
-    <!--Yiddish	yi-->
-    <!--Yoruba	yo-->
-    <!--Zulu	zu-->
 </resources>
