@@ -66,6 +66,95 @@
         <item>bn</item>
         <item>hi</item>
         <item>de</item>
+        <item>af</item>
+        <item>sq</item>
+        <item>am</item>
+        <item>hy</item>
+        <item>az</item>
+        <item>eu</item>
+        <item>be</item>
+        <item>bs</item>
+        <item>bg</item>
+        <item>ca</item>
+        <item>ceb</item>
+        <item>co</item>
+        <item>hr</item>
+        <item>cs</item>
+        <item>da</item>
+        <item>nl</item>
+        <item>et</item>
+        <item>fi</item>
+        <item>fy</item>
+        <item>gl</item>
+        <item>ka</item>
+        <item>el</item>
+        <item>gu</item>
+        <item>ht</item>
+        <item>ha</item>
+        <item>haw</item>
+        <item>iw</item>
+        <item>hmn</item>
+        <item>hu</item>
+        <item>is</item>
+        <item>ig</item>
+        <item>id</item>
+        <item>ga</item>
+        <item>jw</item>
+        <item>kn</item>
+        <item>kk</item>
+        <item>km</item>
+        <item>ku</item>
+        <item>ky</item>
+        <item>lo</item>
+        <item>la</item>
+        <item>lv</item>
+        <item>lt</item>
+        <item>lb</item>
+        <item>mk</item>
+        <item>mg</item>
+        <item>ms</item>
+        <item>ml</item>
+        <item>mt</item>
+        <item>mi</item>
+        <item>mr</item>
+        <item>mn</item>
+        <item>my</item>
+        <item>ne</item>
+        <item>no</item>
+        <item>ny</item>
+        <item>ps</item>
+        <item>fa</item>
+        <item>pl</item>
+        <item>pa</item>
+        <item>ro</item>
+        <item>sm</item>
+        <item>gd</item>
+        <item>sr</item>
+        <item>st</item>
+        <item>sn</item>
+        <item>sd</item>
+        <item>si</item>
+        <item>sk</item>
+        <item>sl</item>
+        <item>so</item>
+        <item>su</item>
+        <item>sw</item>
+        <item>sv</item>
+        <item>tl</item>
+        <item>tg</item>
+        <item>ta</item>
+        <item>te</item>
+        <item>th</item>
+        <item>tr</item>
+        <item>uk</item>
+        <item>ur</item>
+        <item>uz</item>
+        <item>vi</item>
+        <item>cy</item>
+        <item>xh</item>
+        <item>yi</item>
+        <item>yo</item>
+        <item>zu</item>
     </string-array>
     <string-array name="language_names">
         <item>English</item>
@@ -83,6 +172,95 @@
         <item>বাংলা</item>
         <item>हिन्दी</item>
         <item>Deutsch</item>
+        <item>Afrikaans</item>
+        <item>Shqip</item>
+        <item>አማርኛ</item>
+        <item>Հայերեն</item>
+        <item>azərbaycan dili</item>
+        <item>euskara</item>
+        <item>беларуская мова</item>
+        <item>bosanski jezik</item>
+        <item>български език</item>
+        <item>català</item>
+        <item>нохчийн мотт</item>
+        <item>corsu</item>
+        <item>hrvatski jezik</item>
+        <item>čeština</item>
+        <item>dansk</item>
+        <item>Nederlands</item>
+        <item>eesti</item>
+        <item>suomi</item>
+        <item>Frysk</item>
+        <item>Galego</item>
+        <item>ქართული</item>
+        <item>ελληνικά</item>
+        <item>ગુજરાતી</item>
+        <item>Kreyòl ayisyen</item>
+        <item>(Hausa) هَوُسَ</item>
+        <item>Ōlelo Hawaiʻi</item>
+        <item>עברית</item>
+        <item>Hmoob</item>
+        <item>magyar</item>
+        <item>Íslenska</item>
+        <item>Asụsụ Igbo</item>
+        <item>Bahasa Indonesia</item>
+        <item>Gaeilge</item>
+        <item>Basa Jawa</item>
+        <item>ಕನ್ನಡ</item>
+        <item>қазақ тілі</item>
+        <item>ខ្មែរ</item>
+        <item>Kurdî</item>
+        <item>Кыргызча</item>
+        <item>ພາສາລາວ</item>
+        <item>latine</item>
+        <item>latviešu valoda</item>
+        <item>lietuvių kalba</item>
+        <item>Lëtzebuergesch</item>
+        <item>македонски јазик</item>
+        <item>fiteny malagasy</item>
+        <item>Bahasa Melayu</item>
+        <item>മലയാളം</item>
+        <item>Malti</item>
+        <item>te reo Māori</item>
+        <item>मराठी</item>
+        <item>Монгол хэл</item>
+        <item>ဗမာစာ</item>
+        <item>नेपाली</item>
+        <item>Norsk</item>
+        <item>chiCheŵa</item>
+        <item>پښتو</item>
+        <item>فارسی</item>
+        <item>język polski</item>
+        <item>ਪੰਜਾਬੀ</item>
+        <item>Română</item>
+        <item>gagana fa\'a Samoa</item>
+        <item>Gàidhlig</item>
+        <item>српски језик</item>
+        <item>Sesotho</item>
+        <item>chiShona</item>
+        <item>सिन्धी</item>
+        <item>සිංහල</item>
+        <item>Slovenčina</item>
+        <item>Slovenski Jezik</item>
+        <item>Soomaaliga</item>
+        <item>Basa Sunda</item>
+        <item>Kiswahili</item>
+        <item>Svenska</item>
+        <item>Wikang Tagalog</item>
+        <item>тоҷикӣ</item>
+        <item>தமிழ்</item>
+        <item>తెలుగు</item>
+        <item>ไทย</item>
+        <item>Türkçe</item>
+        <item>Українська</item>
+        <item>اردو</item>
+        <item>Oʻzbek</item>
+        <item>Tiếng Việt</item>
+        <item>Cymraeg</item>
+        <item>isiXhosa</item>
+        <item>ייִדיש</item>
+        <item>Yorùbá</item>
+        <item>isiZulu</item>
     </string-array>
 
 </resources>
