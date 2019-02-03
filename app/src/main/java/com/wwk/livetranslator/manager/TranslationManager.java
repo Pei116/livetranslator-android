@@ -44,7 +44,7 @@ public class TranslationManager {
 
     private static volatile TranslationManager instance;
 
-    private boolean serviceEnabled = false;
+    private boolean serviceEnabled;
     private String sourceLanguage;
     private String targetLanguage;
     private String detectedLanguage;
