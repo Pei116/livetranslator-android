@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +30,8 @@ public class LanguagesActivity extends AppCompatActivity {
 
     private RecyclerView listView;
     private ItemTouchHelper itemTouchHelper;
+    private MenuItem checkAllItem;
+    private MenuItem checkClearItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +78,46 @@ public class LanguagesActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.languages, menu);
+
+        checkAllItem = menu.findItem(R.id.action_check_all);
+        checkClearItem = menu.findItem(R.id.action_check_clear);
+
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (LanguageManager.getInstance().isAllSelected()) {
+            checkAllItem.setVisible(false);
+            checkClearItem.setVisible(true);
+        }
+        else {
+            checkAllItem.setVisible(true);
+            checkClearItem.setVisible(false);
+        }
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
                 finish();
+                return true;
+            case R.id.action_check_all:
+                LanguageManager.getInstance().selectAll();
+                listView.getAdapter().notifyDataSetChanged();
+                invalidateOptionsMenu();
+                return true;
+            case R.id.action_check_clear:
+                LanguageManager.getInstance().clearSelection();
+                listView.getAdapter().notifyDataSetChanged();
+                invalidateOptionsMenu();
                 return true;
         }
 
@@ -118,12 +156,10 @@ public class LanguagesActivity extends AppCompatActivity {
             onBind = false;
             viewHolder.languageView.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (!onBind) {
-                    int oldPosition = languages.indexOf(language);
                     LanguageManager.getInstance().toggleLanguage(language, isChecked);
                     languages = LanguageManager.getInstance().getLanguagesForSelection();
-                    int newPosition = languages.indexOf(language);
-                    notifyItemMoved(oldPosition, newPosition);
-                    notifyItemChanged(newPosition);
+                    notifyDataSetChanged();
+                    LanguagesActivity.this.invalidateOptionsMenu();
 
                     if (language.equals(TranslationManager.getInstance().getSourceLanguage())) {
                         TranslationManager.getInstance().setSourceLanguage(null);

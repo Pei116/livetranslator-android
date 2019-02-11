@@ -15,7 +15,7 @@
             android:key="pref_languages"
             android:title="@string/pref_languages"
             android:summary="@string/pref_languages_detail">
-            <intent android:targetPackage="com.wwk.livetranslator"
+            <intent android:targetPackage="${applicationId}"
                 android:targetClass="com.wwk.livetranslator.activity.LanguagesActivity"/>
         </android.support.v7.preference.Preference>
 

@@ -8,6 +8,7 @@ import com.wwk.livetranslator.model.Language;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -69,9 +70,16 @@ public class LanguageManager {
                 .sort("order")
                 .findAll();
         if (objects.size() == 0) {
+            Language firstLanguage = detectOSLanguage();
+            if (firstLanguage != null) {
+                firstLanguage.isFavorite = true;
+                myLanguages.add(firstLanguage);
+            }
             for (Language lang : allLanguages) {
-                lang.isFavorite = true;
-                myLanguages.add(lang);
+                if (lang != firstLanguage) {
+                    lang.isFavorite = true;
+                    myLanguages.add(lang);
+                }
             }
         }
         else {
@@ -129,6 +137,28 @@ public class LanguageManager {
         saveMyLanguages();
     }
 
+    public boolean isAllSelected() {
+        return myLanguages.size() == allLanguages.size();
+    }
+
+    public void selectAll() {
+        for (Language lang : allLanguages) {
+            if (!lang.isFavorite) {
+                lang.isFavorite = true;
+                myLanguages.add(lang);
+            }
+        }
+    }
+
+    public void clearSelection() {
+        for (Language lang : allLanguages) {
+            if (lang.isFavorite) {
+                lang.isFavorite = false;
+                myLanguages.remove(lang);
+            }
+        }
+    }
+
     private void saveMyLanguages() {
         for (int i = 0; i < myLanguages.size(); i++) {
             Language language = myLanguages.get(i);
@@ -138,5 +168,15 @@ public class LanguageManager {
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(myLanguages);
         realm.commitTransaction();
+    }
+
+    private Language detectOSLanguage() {
+        String code = Locale.getDefault().getLanguage();
+        for (Language language : allLanguages) {
+            if (code.equals(language.code)) {
+                return language;
+            }
+        }
+        return null;
     }
 }
