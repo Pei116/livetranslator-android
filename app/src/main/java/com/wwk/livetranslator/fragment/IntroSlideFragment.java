@@ -1,7 +1,9 @@
 package com.wwk.livetranslator.fragment;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.provider.Settings;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -150,8 +153,7 @@ public class IntroSlideFragment extends Fragment
             builder.setTitle(R.string.permission_ontop_title);
             builder.setMessage(R.string.permission_ontop_rationale);
             builder.setPositiveButton(R.string.action_allow, (dialog, i) -> {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getContext().getPackageName()));
-                startActivityForResult(intent, Constants.INTENT_OVERLAY_SETTINGS);
+                onRequestPermission(null);
             });
             builder.setNegativeButton(R.string.action_no_thanks, (dialog, i) -> {
                 permissionIgnored = true;
@@ -168,4 +170,15 @@ public class IntroSlideFragment extends Fragment
         }
     }
 
+    @Override
+    @TargetApi(Build.VERSION_CODES.M)
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.INTENT_OVERLAY_SETTINGS) {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean(Constants.PREF_TRANSLATION_POPUP, Settings.canDrawOverlays(getContext()));
+            editor.apply();
+        }
+    }
 }
