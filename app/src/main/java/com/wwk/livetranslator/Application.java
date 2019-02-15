@@ -10,10 +10,9 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
-import com.wwk.livetranslator.helper.BuildInfo;
-import com.wwk.livetranslator.manager.TranslationManager;
-
 import io.fabric.sdk.android.Fabric;
+import com.wwk.livetranslator.helper.BuildInfo;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
