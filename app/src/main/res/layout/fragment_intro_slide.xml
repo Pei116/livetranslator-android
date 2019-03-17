@@ -63,7 +63,6 @@
         android:layout_marginBottom="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:onClick="onRequestPermission"
         android:padding="8dp"
         android:text="@string/action_permission"
         style="@style/Button.Overlay.Round"
