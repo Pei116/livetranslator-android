@@ -69,7 +69,7 @@ dependencies {
     implementation "com.android.support:preference-v7:$SUPPORT"
     implementation "com.android.support:preference-v14:$SUPPORT"
     implementation 'br.com.simplepass:loading-button-android:1.8.4'
-    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-core:16.0.8'
 }
 
 apply plugin: 'realm-android'

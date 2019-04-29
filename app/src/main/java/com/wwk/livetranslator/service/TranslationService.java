@@ -56,6 +56,10 @@ public class TranslationService extends JobService {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (null == intent || null == intent.getAction ()) {
+            return START_STICKY;
+        }
+
         final String action = intent.getAction();
         if (Constants.ACTION_OPEN_SERVICE.equals(action)) {
             OverlayWindowManager.getInstance().checkAndShowMainOverlay(this);
