@@ -1,39 +1,23 @@
 package com.wwk.livetranslator.helper;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import java.lang.reflect.Field;
 import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.UUID;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-
-import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
-import static android.text.format.DateUtils.FORMAT_NUMERIC_DATE;
-import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
-import static android.text.format.DateUtils.FORMAT_SHOW_YEAR;
-import static android.text.format.DateUtils.MINUTE_IN_MILLIS;
 
 /**
  * Created by Pei on 11/28/17.
@@ -125,7 +109,7 @@ public class Utility {
         Snackbar snackbar = Snackbar.make(view, stringResId, duration);
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(Color.BLACK);
-        TextView textView = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
         return snackbar;
     }
@@ -134,7 +118,7 @@ public class Utility {
         Snackbar snackbar = Snackbar.make(view, message, duration);
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(Color.BLACK);
-        TextView textView = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
         return snackbar;
     }

@@ -2,9 +2,10 @@ package com.wwk.livetranslator.widget;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import androidx.cardview.widget.CardView;
 
 /**
  * Created by Pei on 8/9/17.

@@ -15,7 +15,7 @@
         card_view:cardCornerRadius="@dimen/card_radius_small"
         card_view:cardUseCompatPadding="true">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -49,7 +49,7 @@
                 card_view:layout_constraintTop_toBottomOf="@+id/view"
                 tools:text="Target Text" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.wwk.livetranslator.widget.ClickableCardView>
 

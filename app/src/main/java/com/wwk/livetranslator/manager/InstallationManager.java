@@ -2,8 +2,9 @@ package com.wwk.livetranslator.manager;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
+
+import androidx.preference.PreferenceManager;
 
 import com.wwk.livetranslator.Application;
 import com.wwk.livetranslator.Constants;
