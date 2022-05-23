@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -392,6 +393,9 @@ public class OverlayWindowManager
                 .setDuration(100);
 
         setupFields();
+
+        sourceText.setTextSize(TypedValue.COMPLEX_UNIT_PX,context.getResources().getDimension(R.dimen.overlay_text_size));
+        targetText.setTextSize(TypedValue.COMPLEX_UNIT_PX,context.getResources().getDimension(R.dimen.overlay_text_size));
     }
 
     private void setupFields() {

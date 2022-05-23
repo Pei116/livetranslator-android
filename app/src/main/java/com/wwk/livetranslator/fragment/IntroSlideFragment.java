@@ -78,9 +78,9 @@ public class IntroSlideFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         containerView = view.findViewById(R.id.containerView);
 
-        titleView = view.findViewById(R.id.titleView);
-        detailView = view.findViewById(R.id.detailView);
-        imageView = view.findViewById(R.id.imageView);
+        titleView = view.findViewById(R.id.title);
+        detailView = view.findViewById(R.id.description);
+        imageView = view.findViewById(R.id.image);
         permissionButton = view.findViewById(R.id.permissionButton);
 
         permissionButton.setOnClickListener(this::onRequestPermission);

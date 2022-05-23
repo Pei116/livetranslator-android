@@ -17,7 +17,7 @@ import com.wwk.livetranslator.Constants;
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.fragment.IntroSlideFragment;
 
-public class IntroActivity extends AppIntro2 {
+public class IntroActivity extends AppIntro {
 
     private final int NUM_SLIDES = 3;
 
@@ -35,6 +35,7 @@ public class IntroActivity extends AppIntro2 {
             addSlide(IntroSlideFragment.newInstance(i));
         }
         setColorTransitionsEnabled(true);
+        setTransformer(new AppIntroPageTransformerType.Parallax(1.0, -1.0, 2.0));
     }
 
     @Override
