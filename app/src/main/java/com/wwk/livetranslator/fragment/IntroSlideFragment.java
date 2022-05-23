@@ -21,8 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
-import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
-import com.github.paolorotolo.appintro.ISlidePolicy;
+import com.github.appintro.SlideBackgroundColorHolder;
+import com.github.appintro.SlidePolicy;
 import com.wwk.livetranslator.Constants;
 import com.wwk.livetranslator.R;
 
@@ -32,7 +32,7 @@ import com.wwk.livetranslator.R;
  */
 
 public class IntroSlideFragment extends Fragment
-        implements ISlideBackgroundColorHolder, ISlidePolicy {
+        implements SlideBackgroundColorHolder, SlidePolicy {
 
     private static final String ARG_SLIDE_NUMBER = "slide_number";
 
@@ -124,6 +124,17 @@ public class IntroSlideFragment extends Fragment
             return getResources().getColor(R.color.intro_slide_bg_2);
         } else {
             return getResources().getColor(R.color.intro_slide_bg_3);
+        }
+    }
+
+    @Override
+    public int getDefaultBackgroundColorRes() {
+        if (slideNumber == 1) {
+            return R.color.intro_slide_bg_1;
+        } else if (slideNumber == 2) {
+            return R.color.intro_slide_bg_2;
+        } else {
+            return R.color.intro_slide_bg_3;
         }
     }
 

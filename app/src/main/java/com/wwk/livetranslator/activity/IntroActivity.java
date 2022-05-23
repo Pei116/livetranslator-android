@@ -11,7 +11,8 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.github.paolorotolo.appintro.AppIntro2;
+import com.github.appintro.AppIntro;
+import com.github.appintro.AppIntroPageTransformerType;
 import com.wwk.livetranslator.Constants;
 import com.wwk.livetranslator.R;
 import com.wwk.livetranslator.fragment.IntroSlideFragment;

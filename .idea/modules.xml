@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LiveTranslator.iml" filepath="$PROJECT_DIR$/LiveTranslator.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LiveTranslator.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LiveTranslator.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LiveTranslator.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LiveTranslator.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LiveTranslator.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LiveTranslator.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LiveTranslator.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LiveTranslator.app.unitTest.iml" />
     </modules>
   </component>
 </project>
