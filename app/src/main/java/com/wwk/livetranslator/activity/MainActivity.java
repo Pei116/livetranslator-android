@@ -33,7 +33,7 @@ import com.wwk.livetranslator.manager.BookmarkManager;
 import com.wwk.livetranslator.manager.OverlayWindowManager;
 import com.wwk.livetranslator.manager.TranslationManager;
 
-import br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton;
+import br.com.simplepass.loadingbutton.customViews.CircularProgressImageButton;
 
 public class MainActivity extends AppCompatActivity {
 

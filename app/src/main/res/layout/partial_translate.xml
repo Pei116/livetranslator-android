@@ -64,12 +64,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-            <br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressImageButton
                 android:id="@+id/translateButton"
                 android:layout_width="@dimen/translate_button_width"
                 android:layout_height="@dimen/translate_button_height"
                 android:layout_margin="4dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/button_circular"
                 android:elevation="4dp"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:onClick="onTranslate"

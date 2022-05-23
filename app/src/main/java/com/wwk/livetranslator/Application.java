@@ -10,8 +10,7 @@ import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.wwk.livetranslator.helper.BuildInfo;
 
 import io.realm.Realm;
@@ -54,7 +53,7 @@ public class Application extends android.app.Application {
         registerActivityLifecycleCallbacks(lifecycleCallbacks);
 
         if (!BuildInfo.isDevelopment()) {
-            Fabric.with(this, new Crashlytics());
+            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
         }
 
         Realm.init(this);

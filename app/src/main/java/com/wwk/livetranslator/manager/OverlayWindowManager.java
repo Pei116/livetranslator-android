@@ -30,7 +30,7 @@ import com.wwk.livetranslator.adapter.LanguageListAdapter;
 
 import java.lang.reflect.Field;
 
-import br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton;
+import br.com.simplepass.loadingbutton.customViews.CircularProgressImageButton;
 
 /**
  * Created by wwk on 11/12/17.
