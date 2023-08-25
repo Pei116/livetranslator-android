@@ -91,7 +91,11 @@ public class IntroSlideFragment extends Fragment
             imageView.setImageResource(R.drawable.img_globe);
         } else if (slideNumber == 2) {
             titleView.setText(R.string.intro_title_2);
-            detailView.setText(R.string.intro_detail_2);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                detailView.setText(R.string.intro_detail_2_s);
+            } else {
+                detailView.setText(R.string.intro_detail_2);
+            }
             imageView.setImageResource(R.drawable.img_languages);
         } else if (slideNumber == 3) {
             titleView.setText(R.string.intro_title_3);
@@ -176,7 +180,7 @@ public class IntroSlideFragment extends Fragment
     }
 
     public void onRequestPermission(View view) {
-        if (slideNumber == 2 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (slideNumber == 2 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(getContext())) {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getContext().getPackageName()));
             startActivityForResult(intent, Constants.INTENT_OVERLAY_SETTINGS);
         }

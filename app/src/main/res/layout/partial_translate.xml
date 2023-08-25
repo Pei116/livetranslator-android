@@ -157,6 +157,21 @@
         app:srcCompat="@drawable/ic_sound" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sourceCopy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="4dp"
+        android:alpha="0.9"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onCopyTarget"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@+id/targetText"
+        app:layout_constraintStart_toStartOf="@+id/targetText"
+        app:srcCompat="@drawable/ic_content_copy" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/targetSpeech"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

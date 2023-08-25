@@ -269,4 +269,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void onCopyTarget(View view) {
+        final ClipboardManager clipboardManager = (ClipboardManager) Application.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        if (clipboardManager != null) {
+            ClipData clipData = ClipData.newPlainText("Live Translation", targetText.getText());
+            clipboardManager.setPrimaryClip(clipData);
+        }
+    }
 }

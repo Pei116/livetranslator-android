@@ -120,11 +120,21 @@ public class TranslationService extends JobService {
 
         Intent openIntent = new Intent(this, TranslationService.class);
         openIntent.setAction(Constants.ACTION_OPEN_SERVICE);
-        PendingIntent openPendingIntent = PendingIntent.getService(this, 0, openIntent, 0);
+        PendingIntent openPendingIntent;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            openPendingIntent = PendingIntent.getService(this, 0, openIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
+        }else {
+            openPendingIntent = PendingIntent.getService(this, 0, openIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
         Intent stopIntent = new Intent(this, TranslationService.class);
         stopIntent.setAction(Constants.ACTION_STOP_SERVICE);
-        PendingIntent stopPendingIntent = PendingIntent.getService(this, 0, stopIntent, 0);
+        PendingIntent stopPendingIntent;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            stopPendingIntent = PendingIntent.getService(this, 0, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        }else {
+            stopPendingIntent = PendingIntent.getService(this, 0, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
 
         Notification notification = notificationBuilder.setOngoing(true)
                 .setSmallIcon(R.mipmap.ic_status_bar)
